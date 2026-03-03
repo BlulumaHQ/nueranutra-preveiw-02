@@ -6,9 +6,9 @@ import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "Our Services", path: "/services" },
-  { label: "About Us", path: "/about" },
-  { label: "Contact Us", path: "/contact" },
+  { label: "Our Services", path: "/our-services" },
+  { label: "About Us", path: "/about-us" },
+  { label: "Contact Us", path: "/contact-us" },
 ];
 
 const Header = () => {
@@ -36,7 +36,7 @@ const Header = () => {
             </Link>
           ))}
           <Button asChild>
-            <Link to="/contact?type=quote">Request a Quote</Link>
+            <Link to="/contact-us?type=quote">Request a Quote</Link>
           </Button>
         </nav>
 
@@ -67,7 +67,7 @@ const Header = () => {
               </Link>
             ))}
             <Button asChild className="w-fit">
-              <Link to="/contact?type=quote" onClick={() => setMobileOpen(false)}>
+              <Link to="/contact-us?type=quote" onClick={() => setMobileOpen(false)}>
                 Request a Quote
               </Link>
             </Button>

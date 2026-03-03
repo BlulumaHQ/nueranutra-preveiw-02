@@ -19,10 +19,10 @@ const Footer = () => {
           <div>
             <h4 className="font-sans text-sm font-bold uppercase tracking-wider mb-4 text-primary-foreground/90">Services</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/services#turnkey-manufacturing" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Turnkey Manufacturing Solutions</Link></li>
-              <li><Link to="/services#formulation-development" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Formulation & Development Support</Link></li>
-              <li><Link to="/services#custom-packaging" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Custom Packaging Services</Link></li>
-              <li><Link to="/services#regulatory-compliance" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Regulatory & Compliance Guidance</Link></li>
+              <li><Link to="/our-services#turnkey-manufacturing" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Turnkey Manufacturing Solutions</Link></li>
+              <li><Link to="/our-services#formulation-development" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Formulation & Development Support</Link></li>
+              <li><Link to="/our-services#custom-packaging" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Custom Packaging Services</Link></li>
+              <li><Link to="/our-services#regulatory-compliance" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Regulatory & Compliance Guidance</Link></li>
             </ul>
           </div>
 
@@ -31,9 +31,9 @@ const Footer = () => {
             <h4 className="font-sans text-sm font-bold uppercase tracking-wider mb-4 text-primary-foreground/90">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">About Us</Link></li>
-              <li><Link to="/services" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Our Services</Link></li>
-              <li><Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Contact Us</Link></li>
+              <li><Link to="/about-us" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">About Us</Link></li>
+              <li><Link to="/our-services" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Our Services</Link></li>
+              <li><Link to="/contact-us" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
