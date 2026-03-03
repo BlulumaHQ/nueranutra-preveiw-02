@@ -23,21 +23,21 @@ import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
 
 const certIcons = [
-  { src: gmpRed, alt: "GMP Certified" },
-  { src: cgmp, alt: "cGMP Certified" },
-  { src: usdaOrganic, alt: "USDA Organic" },
-  { src: halal, alt: "IFANCC Halal Certified" },
-  { src: gmpGreen, alt: "GMP Practice Certified" },
-  { src: healthCanada, alt: "Health Canada GMP Certified" },
-  { src: fda, alt: "FDA Registered" },
-];
+{ src: gmpRed, alt: "GMP Certified" },
+{ src: cgmp, alt: "cGMP Certified" },
+{ src: usdaOrganic, alt: "USDA Organic" },
+{ src: halal, alt: "IFANCC Halal Certified" },
+{ src: gmpGreen, alt: "GMP Practice Certified" },
+{ src: healthCanada, alt: "Health Canada GMP Certified" },
+{ src: fda, alt: "FDA Registered" }];
+
 
 const Index = () => {
   return (
     <>
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 1 – HERO (full-width image with text overlay, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 1 – HERO (full-width image with text overlay, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative min-h-[85vh] flex items-end">
         <div className="absolute inset-0">
           <img src={about5} alt="NuEra Manufacturing Facility" className="w-full h-full object-cover" />
@@ -71,43 +71,43 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 2 – 3 PILLAR HORIZONTAL CARDS (with images, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 2 – 3 PILLAR HORIZONTAL CARDS (with images, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-20">
         <div className="container">
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                title: "Startup Supplement Brands",
-                body: "Turnkey guidance, faster timelines, and regulatory-ready documentation designed for first-time launches.",
-                img: servicesHome1,
-              },
-              {
-                title: "Established Global Brands",
-                body: "Scalable high-volume production with disciplined GMP processes and export-ready documentation.",
-                img: servicesHome3,
-              },
-              {
-                title: "Quality & Sustainability",
-                body: "Documented quality control, controlled manufacturing flow, and responsible production standards that protect brand integrity.",
-                img: receptionImg,
-              },
-            ].map((card) => (
-              <div key={card.title} className="group">
+            {
+              title: "Startup Supplement Brands",
+              body: "Turnkey guidance, faster timelines, and regulatory-ready documentation designed for first-time launches.",
+              img: servicesHome1
+            },
+            {
+              title: "Established Global Brands",
+              body: "Scalable high-volume production with disciplined GMP processes and export-ready documentation.",
+              img: servicesHome3
+            },
+            {
+              title: "Quality & Sustainability",
+              body: "Documented quality control, controlled manufacturing flow, and responsible production standards that protect brand integrity.",
+              img: receptionImg
+            }].
+            map((card) =>
+            <div key={card.title} className="group">
                 <div className="h-56 overflow-hidden rounded-lg mb-5">
                   <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <h3 className="text-xl font-serif font-bold text-foreground mb-2">{card.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{card.body}</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 3 – CAPABILITY GRID (stories-style: 1 large left + 3 small right, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 3 – CAPABILITY GRID (stories-style: 1 large left + 3 small right, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-20 section-light">
         <div className="container">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-10">
@@ -117,7 +117,7 @@ const Index = () => {
             {/* Large featured card */}
             <div className="group relative overflow-hidden rounded-lg">
               <div className="h-full min-h-[400px] overflow-hidden">
-                <img src={servicesHome3} alt="High-Speed Encapsulation" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img alt="High-Speed Encapsulation" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/lovable-uploads/19fab4ee-8d11-40b4-820d-d761b04d0784.jpg" />
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-primary/90 to-transparent">
                 <p className="text-secondary text-xs font-semibold uppercase tracking-wider mb-1">Manufacturing</p>
@@ -128,26 +128,26 @@ const Index = () => {
             {/* 3 smaller cards in right column */}
             <div className="grid gap-6">
               {[
-                {
-                  title: "Advanced Tableting",
-                  body: "3 tabletting lines plus pharmaceutical-grade coating drum capability for finish quality and stability.",
-                  img: servicesHome4,
-                  tag: "Manufacturing",
-                },
-                {
-                  title: "Automated Bottling & Packaging",
-                  body: "2 automated bottling lines with blister, sachet, and stick-pak options for modern consumer formats.",
-                  img: servicesHome2,
-                  tag: "Packaging",
-                },
-                {
-                  title: "Powder Blending & Custom Formulation",
-                  body: "3 powder blenders in multiple capacities supporting custom formulas and scalable runs.",
-                  img: servicesHome1,
-                  tag: "Formulation",
-                },
-              ].map((card) => (
-                <div key={card.title} className="group flex gap-4 items-start">
+              {
+                title: "Advanced Tableting",
+                body: "3 tabletting lines plus pharmaceutical-grade coating drum capability for finish quality and stability.",
+                img: servicesHome4,
+                tag: "Manufacturing"
+              },
+              {
+                title: "Automated Bottling & Packaging",
+                body: "2 automated bottling lines with blister, sachet, and stick-pak options for modern consumer formats.",
+                img: servicesHome2,
+                tag: "Packaging"
+              },
+              {
+                title: "Powder Blending & Custom Formulation",
+                body: "3 powder blenders in multiple capacities supporting custom formulas and scalable runs.",
+                img: servicesHome1,
+                tag: "Formulation"
+              }].
+              map((card) =>
+              <div key={card.title} className="group flex gap-4 items-start">
                   <div className="w-32 h-24 shrink-0 overflow-hidden rounded-lg">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
@@ -157,7 +157,7 @@ const Index = () => {
                     <p className="text-muted-foreground text-xs leading-relaxed">{card.body}</p>
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
           <div className="mt-8">
@@ -169,8 +169,8 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 4 – ABOUT SPLIT BLOCK (bg color left text, image right, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 4 – ABOUT SPLIT BLOCK (bg color left text, image right, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative">
         <div className="grid md:grid-cols-2 min-h-[500px]">
           {/* Left: colored background with text */}
@@ -198,8 +198,8 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 5 – PIPELINE SPLIT BLOCK (image left, text right, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 5 – PIPELINE SPLIT BLOCK (image left, text right, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative">
         <div className="grid md:grid-cols-2 min-h-[500px]">
           {/* Left: image */}
@@ -222,8 +222,8 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 6 – REGULATORY & COMPLIANCE SPLIT BLOCK (bg left text, image right, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 6 – REGULATORY & COMPLIANCE SPLIT BLOCK (bg left text, image right, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="relative">
         <div className="grid md:grid-cols-2 min-h-[500px]">
           {/* Left: colored background */}
@@ -246,8 +246,8 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 7 – GMP-CERTIFIED SOLUTIONS + CERT ICONS
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 7 – GMP-CERTIFIED SOLUTIONS + CERT ICONS
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-20">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">GMP-Certified Solutions</h2>
@@ -255,16 +255,16 @@ const Index = () => {
             Our certifications reflect disciplined manufacturing systems, documented quality control, and compliance readiness for global distribution.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {certIcons.map((cert) => (
-              <img key={cert.alt} src={cert.src} alt={cert.alt} className="h-20 md:h-24 w-auto object-contain" />
-            ))}
+            {certIcons.map((cert) =>
+            <img key={cert.alt} src={cert.src} alt={cert.alt} className="h-20 md:h-24 w-auto object-contain" />
+            )}
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 8 – FINAL CONVERSION BLOCK (before footer)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 8 – FINAL CONVERSION BLOCK (before footer)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-20 hero-gradient">
         <div className="container text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground mb-4">Ready to Launch Your Product?</h2>
@@ -286,18 +286,18 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 9 – RELATED LINKS GRID (3 cards, like Merck)
-          ═══════════════════════════════════════════════════════════════ */}
+           SECTION 9 – RELATED LINKS GRID (3 cards, like Merck)
+           ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 md:py-20 section-light">
         <div className="container">
           <h2 className="text-3xl font-serif font-bold text-foreground mb-10">Related Links</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "Our Services", desc: "Explore our turnkey manufacturing, formulation, and packaging capabilities.", path: "/services", img: servicesHome3 },
-              { title: "About Us", desc: "Learn about our history, facility, and commitment to quality since 2007.", path: "/about", img: about4 },
-              { title: "Contact Us", desc: "Get in touch for quotes, consultations, or to submit your product formula.", path: "/contact", img: servicesHome2 },
-            ].map((card) => (
-              <Link to={card.path} key={card.title} className="group block overflow-hidden rounded-lg bg-card hover:shadow-lg transition-shadow">
+            { title: "Our Services", desc: "Explore our turnkey manufacturing, formulation, and packaging capabilities.", path: "/services", img: servicesHome3 },
+            { title: "About Us", desc: "Learn about our history, facility, and commitment to quality since 2007.", path: "/about", img: about4 },
+            { title: "Contact Us", desc: "Get in touch for quotes, consultations, or to submit your product formula.", path: "/contact", img: servicesHome2 }].
+            map((card) =>
+            <Link to={card.path} key={card.title} className="group block overflow-hidden rounded-lg bg-card hover:shadow-lg transition-shadow">
                 <div className="h-48 overflow-hidden">
                   <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
@@ -309,12 +309,12 @@ const Index = () => {
                   </span>
                 </div>
               </Link>
-            ))}
+            )}
           </div>
         </div>
       </section>
-    </>
-  );
+    </>);
+
 };
 
 export default Index;
