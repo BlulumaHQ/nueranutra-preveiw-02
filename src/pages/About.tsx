@@ -6,25 +6,25 @@ import partnershipImg from "@/assets/partnership.jpg";
 import { Building, Award, Users, Calendar } from "lucide-react";
 
 const milestones = [
-  { year: "2007", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
-  { year: "2010", event: "Achieved GMP certification and expanded encapsulation capacity." },
-  { year: "2013", event: "Added tableting lines and pharmaceutical-grade coating capabilities." },
-  { year: "2016", event: "Expanded facility to 30,000 sq. ft. with automated bottling lines." },
-  { year: "2019", event: "Obtained USDA Organic, Halal, and additional GMP certifications." },
-  { year: "2022", event: "Upgraded to 5 high-speed encapsulation lines and added sachet/blister packaging." },
-  { year: "2025", event: "Continuing to serve startup and global brands with precision manufacturing." },
-];
+{ year: "2007", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
+{ year: "2010", event: "Achieved GMP certification and expanded encapsulation capacity." },
+{ year: "2013", event: "Added tableting lines and pharmaceutical-grade coating capabilities." },
+{ year: "2016", event: "Expanded facility to 30,000 sq. ft. with automated bottling lines." },
+{ year: "2019", event: "Obtained USDA Organic, Halal, and additional GMP certifications." },
+{ year: "2022", event: "Upgraded to 5 high-speed encapsulation lines and added sachet/blister packaging." },
+{ year: "2025", event: "Continuing to serve startup and global brands with precision manufacturing." }];
+
 
 const facilityStats = [
-  { label: "Facility Size", value: "30,000 sq. ft." },
-  { label: "Encapsulation Lines", value: "5 High-Speed" },
-  { label: "Tabletting Lines", value: "3 Lines" },
-  { label: "Coating Drum", value: "1 Pharma-Grade" },
-  { label: "Powder Blenders", value: "3 (Various Capacities)" },
-  { label: "Bottling Lines", value: "2 Automated" },
-  { label: "Sachet Filling", value: "1 High-Speed Line" },
-  { label: "Blister Packaging", value: "2 High-Speed Lines" },
-];
+{ label: "Facility Size", value: "30,000 sq. ft." },
+{ label: "Encapsulation Lines", value: "5 High-Speed" },
+{ label: "Tabletting Lines", value: "3 Lines" },
+{ label: "Coating Drum", value: "1 Pharma-Grade" },
+{ label: "Powder Blenders", value: "3 (Various Capacities)" },
+{ label: "Bottling Lines", value: "2 Automated" },
+{ label: "Sachet Filling", value: "1 High-Speed Line" },
+{ label: "Blister Packaging", value: "2 High-Speed Lines" }];
+
 
 const About = () => {
   return (
@@ -62,7 +62,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <img src={facilityImg} alt="NuEra Facility" className="rounded-lg shadow-lg w-full" />
+              <img alt="NuEra Facility" className="rounded-lg shadow-lg w-full" src="/lovable-uploads/0ac9be96-af4f-4e51-9bf2-dd2784b8de23.jpg" />
             </div>
           </div>
         </div>
@@ -74,17 +74,17 @@ const About = () => {
           <h2 className="text-3xl font-serif font-bold text-foreground mb-12 text-center">Our Core Values</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: <Award className="text-accent" size={32} />, title: "Quality", desc: "Documented quality control at every stage of production." },
-              { icon: <Users className="text-accent" size={32} />, title: "Partnership", desc: "Responsive, transparent service built on trust." },
-              { icon: <Building className="text-accent" size={32} />, title: "Innovation", desc: "Continuous improvement in processes and capabilities." },
-              { icon: <Calendar className="text-accent" size={32} />, title: "Compliance", desc: "Regulatory confidence for domestic and international markets." },
-            ].map((v) => (
-              <div key={v.title} className="bg-card border border-border rounded-lg p-8 text-center">
+            { icon: <Award className="text-accent" size={32} />, title: "Quality", desc: "Documented quality control at every stage of production." },
+            { icon: <Users className="text-accent" size={32} />, title: "Partnership", desc: "Responsive, transparent service built on trust." },
+            { icon: <Building className="text-accent" size={32} />, title: "Innovation", desc: "Continuous improvement in processes and capabilities." },
+            { icon: <Calendar className="text-accent" size={32} />, title: "Compliance", desc: "Regulatory confidence for domestic and international markets." }].
+            map((v) =>
+            <div key={v.title} className="bg-card border border-border rounded-lg p-8 text-center">
                 <div className="flex justify-center mb-4">{v.icon}</div>
                 <h3 className="text-lg font-serif font-bold text-foreground mb-2">{v.title}</h3>
                 <p className="text-muted-foreground text-sm">{v.desc}</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -94,8 +94,8 @@ const About = () => {
         <div className="container">
           <h2 className="text-3xl font-serif font-bold text-foreground mb-12 text-center">Our Journey</h2>
           <div className="max-w-3xl mx-auto">
-            {milestones.map((m, i) => (
-              <div key={m.year} className="flex gap-6 mb-8 last:mb-0">
+            {milestones.map((m, i) =>
+            <div key={m.year} className="flex gap-6 mb-8 last:mb-0">
                 <div className="flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm shrink-0">
                     {m.year}
@@ -106,7 +106,7 @@ const About = () => {
                   <p className="text-foreground leading-relaxed">{m.event}</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>
@@ -120,16 +120,16 @@ const About = () => {
               <p className="text-muted-foreground leading-relaxed mb-8">
                 Our 30,000 sq. ft. manufacturing facility in Richmond, BC is equipped with state-of-the-art machinery for high-volume, GMP-compliant production across multiple dosage formats.
               </p>
-              <img src={heroBg} alt="Manufacturing Floor" className="rounded-lg shadow-lg w-full" />
+              <img alt="Manufacturing Floor" className="rounded-lg shadow-lg w-full" src="/lovable-uploads/967cb0b1-bbc2-431c-bb00-7949b9b65a3e.jpg" />
             </div>
             <div>
               <div className="grid grid-cols-2 gap-4">
-                {facilityStats.map((stat) => (
-                  <div key={stat.label} className="bg-card border border-border rounded-lg p-5">
+                {facilityStats.map((stat) =>
+                <div key={stat.label} className="bg-card border border-border rounded-lg p-5">
                     <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
                     <p className="text-lg font-bold text-foreground">{stat.value}</p>
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -153,8 +153,8 @@ const About = () => {
           </div>
         </div>
       </section>
-    </>
-  );
+    </>);
+
 };
 
 export default About;
