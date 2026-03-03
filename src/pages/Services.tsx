@@ -75,7 +75,7 @@ const Services = () => {
                 <h2 className="text-3xl font-serif font-bold text-foreground mb-4">{svc.title}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">{svc.body}</p>
                 <Button asChild>
-                  <Link to="/contact?type=quote">Get Started <ArrowRight size={16} /></Link>
+                  <Link to="/contact-us?type=quote">Get Started <ArrowRight size={16} /></Link>
                 </Button>
               </div>
               <div className={i % 2 !== 0 ? "md:[direction:ltr]" : ""}>
@@ -118,10 +118,10 @@ const Services = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button size="lg" asChild>
-              <Link to="/contact?type=quote">Request a Quote</Link>
+              <Link to="/contact-us?type=quote">Request a Quote</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/contact?type=consultation">Book Consultation</Link>
+              <Link to="/contact-us?type=consultation">Book Consultation</Link>
             </Button>
           </div>
         </div>

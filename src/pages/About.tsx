@@ -215,10 +215,10 @@ const About = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button variant="hero" size="lg" asChild>
-              <Link to="/contact?type=quote">Request a Quote</Link>
+              <Link to="/contact-us?type=quote">Request a Quote</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact?type=consultation">Book Consultation</Link>
+              <Link to="/contact-us?type=consultation">Book Consultation</Link>
             </Button>
           </div>
         </div>

@@ -57,13 +57,13 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap gap-3">
               <Button variant="hero" size="lg" asChild>
-                <Link to="/contact?type=quote">Request a Quote</Link>
+                <Link to="/contact-us?type=quote">Request a Quote</Link>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact?type=consultation">Book Consultation</Link>
+                <Link to="/contact-us?type=consultation">Book Consultation</Link>
               </Button>
               <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact?type=formula">Submit Your Formula</Link>
+                <Link to="/contact-us?type=formula">Submit Your Formula</Link>
               </Button>
             </div>
           </div>
@@ -162,7 +162,7 @@ const Index = () => {
           </div>
           <div className="mt-8">
             <Button variant="default" asChild className="bg-primary text-primary-foreground">
-              <Link to="/services">Explore Our Capabilities</Link>
+              <Link to="/our-services">Explore Our Capabilities</Link>
             </Button>
           </div>
         </div>
@@ -182,10 +182,10 @@ const Index = () => {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Button variant="heroOutline" asChild>
-                  <Link to="/about">Who We Are</Link>
+                  <Link to="/about-us">Who We Are</Link>
                 </Button>
                 <Button variant="heroOutline" asChild>
-                  <Link to="/about#facility">Our Facility</Link>
+                  <Link to="/about-us#facility">Our Facility</Link>
                 </Button>
               </div>
             </div>
@@ -214,7 +214,7 @@ const Index = () => {
                 Our structured manufacturing pipeline is designed to reduce delays, strengthen documentation integrity, and accelerate time to market—without compromising compliance.
               </p>
               <Button variant="heroOutline" asChild>
-                <Link to="/services#process">View Our Process <ArrowRight size={16} /></Link>
+                <Link to="/our-services#process">View Our Process <ArrowRight size={16} /></Link>
               </Button>
             </div>
           </div>
@@ -234,7 +234,7 @@ const Index = () => {
                 Navigating regulatory requirements in the nutraceutical industry requires precision, documentation discipline, and current knowledge of domestic and international standards. Our Regulatory & Compliance team supports Health Canada NPN applications, U.S. FDA facility alignment, ingredient verification, label compliance review, and permissible health claim guidance. We assist in preparing Master Manufacturing Records, Certificates of Analysis, stability documentation, and export documentation to ensure products meet all required frameworks. From pre-launch evaluation to ongoing compliance oversight, we reduce regulatory risk and accelerate market entry.
               </p>
               <Button variant="heroOutline" asChild>
-                <Link to="/contact?type=formula&subject=Product+Development">Start Your Product Development</Link>
+                <Link to="/contact-us?type=formula&subject=Product+Development">Start Your Product Development</Link>
               </Button>
             </div>
           </div>
@@ -273,13 +273,13 @@ const Index = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button variant="hero" size="lg" asChild>
-              <Link to="/contact?type=quote">Request a Quote</Link>
+              <Link to="/contact-us?type=quote">Request a Quote</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact?type=consultation">Book Consultation</Link>
+              <Link to="/contact-us?type=consultation">Book Consultation</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact?type=formula">Submit Your Formula</Link>
+              <Link to="/contact-us?type=formula">Submit Your Formula</Link>
             </Button>
           </div>
         </div>
@@ -293,9 +293,9 @@ const Index = () => {
           <h2 className="text-3xl font-serif font-bold text-foreground mb-10">Related Links</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-            { title: "Our Services", desc: "Explore our turnkey manufacturing, formulation, and packaging capabilities.", path: "/services", img: servicesHome3 },
-            { title: "About Us", desc: "Learn about our history, facility, and commitment to quality since 2007.", path: "/about", img: about4 },
-            { title: "Contact Us", desc: "Get in touch for quotes, consultations, or to submit your product formula.", path: "/contact", img: servicesHome2 }].
+             { title: "Our Services", desc: "Explore our turnkey manufacturing, formulation, and packaging capabilities.", path: "/our-services", img: servicesHome3 },
+             { title: "About Us", desc: "Learn about our history, facility, and commitment to quality since 2007.", path: "/about-us", img: about4 },
+             { title: "Contact Us", desc: "Get in touch for quotes, consultations, or to submit your product formula.", path: "/contact-us", img: servicesHome2 }].
             map((card) =>
             <Link to={card.path} key={card.title} className="group block overflow-hidden rounded-lg bg-card hover:shadow-lg transition-shadow">
                 <div className="h-48 overflow-hidden">
