@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Pill, FlaskConical, Package, ShieldCheck, Workflow } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
-import capsulesImg from "@/assets/capsules.jpg";
-import packagingImg from "@/assets/packaging.jpg";
-import labImg from "@/assets/lab.jpg";
-import facilityImg from "@/assets/facility.jpg";
+import { ArrowRight, Pill, FlaskConical, Package, ShieldCheck } from "lucide-react";
+import servicesHome3 from "@/assets/services-home-3.jpg";
+import servicesHome1 from "@/assets/services-home-1.jpg";
+import servicesHome2 from "@/assets/services-home-2.jpg";
+import servicesHome4 from "@/assets/services-home-4.jpg";
 
 const REGULATORY_TEXT = `Navigating regulatory requirements in the nutraceutical industry requires precision, documentation discipline, and current knowledge of domestic and international standards. Our Regulatory & Compliance team supports Health Canada NPN applications, U.S. FDA facility alignment, ingredient verification, label compliance review, and permissible health claim guidance. We assist in preparing Master Manufacturing Records, Certificates of Analysis, stability documentation, and export documentation to ensure products meet all required frameworks. From pre-launch evaluation to ongoing compliance oversight, we reduce regulatory risk and accelerate market entry.`;
 
@@ -15,28 +14,28 @@ const services = [
     title: "Turnkey Manufacturing Solutions",
     body: "End-to-end support from concept to commercialization. Capsule filling, tablet pressing, and powder blending under GMP-compliant processes built for quality, scalability, and speed.",
     icon: <Pill className="text-accent" size={40} />,
-    img: heroBg,
+    img: servicesHome3,
   },
   {
     id: "formulation-development",
     title: "Formulation & Development Support",
     body: "R&D support to create performance-driven formulas—ingredient sourcing, optimization, and manufacturability guidance to turn ideas into market-ready products.",
     icon: <FlaskConical className="text-accent" size={40} />,
-    img: labImg,
+    img: servicesHome1,
   },
   {
     id: "custom-packaging",
     title: "Custom Packaging Services",
     body: "Packaging formats, labeling coordination, and execution across bottles, blister, sachet, and stick-pak solutions—designed for retail readiness and operational efficiency.",
     icon: <Package className="text-accent" size={40} />,
-    img: packagingImg,
+    img: servicesHome2,
   },
   {
     id: "regulatory-compliance",
     title: "Regulatory & Compliance Guidance",
     body: REGULATORY_TEXT,
     icon: <ShieldCheck className="text-accent" size={40} />,
-    img: capsulesImg,
+    img: servicesHome4,
   },
 ];
 
@@ -52,10 +51,10 @@ const processSteps = [
 const Services = () => {
   return (
     <>
-      {/* Hero */}
+      {/* Hero Banner */}
       <section className="relative py-20 md:py-32">
         <div className="absolute inset-0">
-          <img src={facilityImg} alt="Services" className="w-full h-full object-cover" />
+          <img src={servicesHome3} alt="Capsule Manufacturing" className="w-full h-full object-cover" />
           <div className="absolute inset-0 hero-gradient opacity-90" />
         </div>
         <div className="container relative z-10 text-center">
@@ -80,7 +79,9 @@ const Services = () => {
                 </Button>
               </div>
               <div className={i % 2 !== 0 ? "md:[direction:ltr]" : ""}>
-                <img src={svc.img} alt={svc.title} className="rounded-lg shadow-lg w-full" />
+                <div className="aspect-[16/10] overflow-hidden rounded-lg shadow-lg">
+                  <img src={svc.img} alt={svc.title} className="w-full h-full object-cover" />
+                </div>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import servicesHome3 from "@/assets/services-home-3.jpg";
 
 const inquiryTypes = [
   { value: "quote", label: "Request a Quote" },
@@ -44,9 +45,13 @@ const Contact = () => {
 
   return (
     <>
-      {/* Hero */}
-      <section className="py-20 md:py-28 hero-gradient">
-        <div className="container text-center">
+      {/* Hero Banner */}
+      <section className="relative py-20 md:py-32">
+        <div className="absolute inset-0">
+          <img src={servicesHome3} alt="Contact NuEra" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 hero-gradient opacity-90" />
+        </div>
+        <div className="container relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">Contact Us</h1>
           <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
             Ready to start your project? Get in touch with our team.
