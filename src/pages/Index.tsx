@@ -106,7 +106,7 @@ const Index = () => (
               <Link to="/contact-us?type=new-product">Start a New Product</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact-us?type=product-review">Review Your Current Product</Link>
+              <Link to="/contact-us?type=product-assessment#inquiry">Request a Product Assessment</Link>
             </Button>
           </div>
           <p className="mt-8 border-l-2 border-secondary pl-4 text-sm font-semibold leading-relaxed text-primary-foreground">
@@ -199,18 +199,25 @@ const Index = () => (
 
     <section className="py-16 md:py-24">
       <div className="container">
-        <h2 className="mb-10 text-3xl font-bold text-foreground md:text-4xl">Where Are You in Your Product Journey?</h2>
+        <div className="mb-10 max-w-3xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Where Are You in Your Product Journey?</h2>
+          <p className="leading-relaxed text-muted-foreground">Whether you are creating something new or evaluating a product already in production, NuEra can help you determine the right manufacturing, testing and quality-control path forward.</p>
+        </div>
         <div className="grid gap-6 md:grid-cols-2">
           {[
-            { number: "Path 01", title: "I’m Creating a New Product", body: "Work with NuEra on formulation, ingredient sourcing, production planning, packaging and regulatory considerations from the beginning.", cta: "Develop a New Product", type: "new-product" },
-            { number: "Path 02", title: "I Already Have a Product", body: "Bring us your current formulation or manufacturing requirements and discuss quality, testing, production and opportunities for improvement.", cta: "Review My Product", type: "product-review" },
+            { number: "Path 01", eyebrow: "New Product", title: "Build Your Next Product", body: "Develop a new nutraceutical product with support across formulation, ingredient sourcing, manufacturing, packaging and regulatory requirements.", cta: "Start a New Product", type: "new-product" },
+            { number: "Path 02", eyebrow: "Existing Product", title: "Take a Closer Look at What You Already Have", body: "Already have a formulation or product in production? Speak with NuEra about manufacturing consistency, testing, quality control, stability, regulatory considerations and opportunities for improvement.", cta: "Request a Product Assessment", type: "product-assessment" },
           ].map((path) => (
-            <article key={path.number} className="flex min-h-[320px] flex-col rounded-lg border border-border bg-card p-8 shadow-sm md:p-10">
-              <p className="mb-8 text-xs font-bold uppercase tracking-widest text-primary">{path.number}</p>
+            <article key={path.number} className="flex min-h-[320px] flex-col rounded-lg border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-lg md:p-10">
+              <div className="mb-8 flex items-center gap-3">
+                <span className="text-xs font-bold uppercase tracking-widest text-primary">{path.number}</span>
+                <span className="h-px w-8 bg-secondary" />
+                <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{path.eyebrow}</span>
+              </div>
               <h3 className="mb-4 text-2xl font-bold text-foreground">{path.title}</h3>
               <p className="mb-8 leading-relaxed text-muted-foreground">{path.body}</p>
               <Button className="mt-auto w-fit" asChild>
-                <Link to={`/contact-us?type=${path.type}`}>{path.cta}<ArrowRight size={16} /></Link>
+                <Link to={`/contact-us?type=${path.type}#inquiry`}>{path.cta}<ArrowRight size={16} /></Link>
               </Button>
             </article>
           ))}
@@ -262,7 +269,7 @@ const Index = () => (
           <Button variant="hero" size="lg" asChild><Link to="/contact-us?type=general">Schedule a Quality &amp; Technical Consultation</Link></Button>
           <Button variant="heroOutline" size="lg" asChild><Link to="/contact-us?type=new-product">Start a New Product</Link></Button>
         </div>
-        <Link to="/contact-us?type=product-review" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary-foreground underline underline-offset-4">Review an Existing Product <ArrowRight size={14} /></Link>
+        <Link to="/contact-us?type=product-assessment#inquiry" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary-foreground underline underline-offset-4">Request a Product Assessment <ArrowRight size={14} /></Link>
       </div>
     </section>
   </>
