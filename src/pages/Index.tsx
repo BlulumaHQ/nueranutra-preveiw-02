@@ -106,7 +106,7 @@ const Index = () => (
               <Link to="/contact-us?type=new-product">Start a New Product</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact-us?type=product-review">Review Your Current Product</Link>
+              <Link to="/contact-us?type=product-assessment#inquiry">Request a Product Assessment</Link>
             </Button>
           </div>
           <p className="mt-8 border-l-2 border-secondary pl-4 text-sm font-semibold leading-relaxed text-primary-foreground">
@@ -269,7 +269,7 @@ const Index = () => (
           <Button variant="hero" size="lg" asChild><Link to="/contact-us?type=general">Schedule a Quality &amp; Technical Consultation</Link></Button>
           <Button variant="heroOutline" size="lg" asChild><Link to="/contact-us?type=new-product">Start a New Product</Link></Button>
         </div>
-        <Link to="/contact-us?type=product-review" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary-foreground underline underline-offset-4">Review an Existing Product <ArrowRight size={14} /></Link>
+        <Link to="/contact-us?type=product-assessment#inquiry" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary-foreground underline underline-offset-4">Request a Product Assessment <ArrowRight size={14} /></Link>
       </div>
     </section>
   </>
