@@ -6,9 +6,11 @@ import { useToast } from "@/hooks/use-toast";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 
 const inquiryTypes = [
-  { value: "quote", label: "Request a Quote" },
-  { value: "consultation", label: "Book Consultation" },
-  { value: "formula", label: "Submit Product Formula" },
+  { value: "new-product", label: "New Product Development" },
+  { value: "product-review", label: "Existing Product Review" },
+  { value: "manufacturing", label: "Manufacturing Services" },
+  { value: "regulatory", label: "Regulatory & Compliance" },
+  { value: "general", label: "General Inquiry" },
 ];
 
 const Contact = () => {
@@ -19,7 +21,7 @@ const Contact = () => {
     company: "",
     email: "",
     phone: "",
-    inquiryType: "quote",
+    inquiryType: "general",
     message: "",
   });
 
@@ -40,7 +42,7 @@ const Contact = () => {
       title: "Message Sent",
       description: "Thank you for reaching out. We'll get back to you within 1 business day.",
     });
-    setForm({ name: "", company: "", email: "", phone: "", inquiryType: "quote", message: "" });
+    setForm({ name: "", company: "", email: "", phone: "", inquiryType: "general", message: "" });
   };
 
   return (

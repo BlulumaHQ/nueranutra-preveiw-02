@@ -36,7 +36,7 @@ const Header = () => {
             </Link>
           ))}
           <Button asChild>
-            <Link to="/contact-us?type=quote">Request a Quote</Link>
+            <Link to="/contact-us?type=manufacturing">Request a Quote</Link>
           </Button>
         </nav>
 
@@ -67,7 +67,7 @@ const Header = () => {
               </Link>
             ))}
             <Button asChild className="w-fit">
-              <Link to="/contact-us?type=quote" onClick={() => setMobileOpen(false)}>
+              <Link to="/contact-us?type=manufacturing" onClick={() => setMobileOpen(false)}>
                 Request a Quote
               </Link>
             </Button>
