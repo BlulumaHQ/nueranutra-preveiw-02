@@ -3,27 +3,107 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 
 const inquiryTypes = [
   { value: "new-product", label: "New Product Development" },
-  { value: "product-review", label: "Existing Product Review" },
+  { value: "product-assessment", label: "Existing Product Assessment" },
   { value: "manufacturing", label: "Manufacturing Services" },
   { value: "regulatory", label: "Regulatory & Compliance" },
   { value: "general", label: "General Inquiry" },
 ];
 
+const productTypes = ["Capsule", "Tablet", "Powder", "Liquid", "Softgel", "Other"];
+const productStatuses = [
+  "Currently in Market",
+  "Currently in Production",
+  "Formulated but Not Yet Manufactured",
+  "Being Reformulated",
+  "Considering Manufacturer Transfer",
+  "Other",
+];
+const npnStatuses = ["Approved NPN", "NPN Application in Progress", "No NPN Yet", "Not Sure", "Not Applicable"];
+const manufacturingSituations = [
+  "Currently Manufactured by Another Manufacturer",
+  "Currently Manufactured by NuEra",
+  "Not Yet in Production",
+  "Looking for a New Manufacturer",
+  "Other",
+];
+const assessmentReasons = [
+  "Manufacturing Consistency",
+  "Quality Control",
+  "Testing Requirements",
+  "Formulation Review",
+  "Stability",
+  "Regulatory Requirements",
+  "Packaging",
+  "Manufacturing Transfer",
+  "Scaling Production",
+  "General Consultation",
+  "Other",
+];
+const volumes = ["Under 5,000 units", "5,000–25,000 units", "25,001–100,000 units", "Over 100,000 units", "Not Sure Yet"];
+const developmentStages = [
+  "Idea / Concept",
+  "Formula Development",
+  "Existing Formula",
+  "Ready for Manufacturing",
+  "Manufacturer Transfer",
+  "Not Sure",
+];
+
+const fieldClass =
+  "w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring";
+const labelClass = "block text-sm font-medium text-foreground mb-1.5";
+
+const emptyForm = {
+  name: "",
+  company: "",
+  email: "",
+  phone: "",
+  inquiryType: "general",
+  productName: "",
+  productType: "",
+  productStatus: "",
+  npnStatus: "",
+  manufacturingSituation: "",
+  assessmentReason: "",
+  developmentStage: "",
+  estimatedVolume: "",
+  message: "",
+};
+
+const Select = ({
+  label,
+  value,
+  options,
+  onChange,
+  required,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (v: string) => void;
+  required?: boolean;
+}) => (
+  <div>
+    <label className={labelClass}>{label}{required ? " *" : ""}</label>
+    <select required={required} value={value} onChange={(e) => onChange(e.target.value)} className={fieldClass}>
+      <option value="">Please select</option>
+      {options.map((o) => (
+        <option key={o} value={o}>{o}</option>
+      ))}
+    </select>
+  </div>
+);
+
 const Contact = () => {
   const [searchParams] = useSearchParams();
   const { toast } = useToast();
-  const [form, setForm] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    inquiryType: "general",
-    message: "",
-  });
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState(emptyForm);
 
   useEffect(() => {
     const type = searchParams.get("type");
@@ -36,13 +116,46 @@ const Contact = () => {
     }
   }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const set = (patch: Partial<typeof emptyForm>) => setForm((f) => ({ ...f, ...patch }));
+
+  const isAssessment = form.inquiryType === "product-assessment";
+  const isNewProduct = form.inquiryType === "new-product";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "Thank you for reaching out. We'll get back to you within 1 business day.",
+    setSubmitting(true);
+    const { error } = await supabase.from("inquiries").insert({
+      inquiry_type: form.inquiryType,
+      name: form.name.trim(),
+      company: form.company.trim() || null,
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      product_name: isAssessment ? form.productName.trim() || null : null,
+      product_type: isAssessment || isNewProduct ? form.productType || null : null,
+      product_status: isAssessment ? form.productStatus || null : null,
+      npn_status: isAssessment ? form.npnStatus || null : null,
+      manufacturing_situation: isAssessment ? form.manufacturingSituation || null : null,
+      assessment_reason: isAssessment ? form.assessmentReason || null : null,
+      development_stage: isNewProduct ? form.developmentStage || null : null,
+      estimated_volume: isAssessment || isNewProduct ? form.estimatedVolume || null : null,
+      details: form.message.trim(),
     });
-    setForm({ name: "", company: "", email: "", phone: "", inquiryType: "general", message: "" });
+    setSubmitting(false);
+
+    if (error) {
+      toast({
+        title: "Submission Failed",
+        description: "We could not send your inquiry. Please try again or email enquiry@nueranutra.com.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Inquiry Received",
+      description: "Thank you for reaching out. Our team will respond within 1 business day.",
+    });
+    setForm({ ...emptyForm, inquiryType: form.inquiryType });
   };
 
   return (
@@ -61,7 +174,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
+      <section id="inquiry" className="py-16 md:py-24">
         <div className="container">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Info */}
@@ -107,73 +220,86 @@ const Contact = () => {
               <div className="bg-card border border-border rounded-lg p-8">
                 <h3 className="text-xl font-serif font-bold text-foreground mb-6">Send Us a Message</h3>
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">Name *</label>
-                      <input
-                        type="text"
-                        required
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">Company *</label>
-                      <input
-                        type="text"
-                        required
-                        value={form.company}
-                        onChange={(e) => setForm({ ...form, company: e.target.value })}
-                        className="w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">Email *</label>
-                      <input
-                        type="email"
-                        required
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">Phone (optional)</label>
-                      <input
-                        type="tel"
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      />
-                    </div>
-                  </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Inquiry Type *</label>
+                    <label className={labelClass}>Inquiry Type *</label>
                     <select
                       value={form.inquiryType}
-                      onChange={(e) => setForm({ ...form, inquiryType: e.target.value })}
-                      className="w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      onChange={(e) => set({ inquiryType: e.target.value })}
+                      className={fieldClass}
                     >
                       {inquiryTypes.map((t) => (
                         <option key={t.value} value={t.value}>{t.label}</option>
                       ))}
                     </select>
                   </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className={labelClass}>Full Name *</label>
+                      <input type="text" required value={form.name} onChange={(e) => set({ name: e.target.value })} className={fieldClass} />
+                    </div>
+                    <div>
+                      <label className={labelClass}>Company Name *</label>
+                      <input type="text" required value={form.company} onChange={(e) => set({ company: e.target.value })} className={fieldClass} />
+                    </div>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className={labelClass}>Email *</label>
+                      <input type="email" required value={form.email} onChange={(e) => set({ email: e.target.value })} className={fieldClass} />
+                    </div>
+                    <div>
+                      <label className={labelClass}>Phone{isAssessment || isNewProduct ? "" : " (optional)"}</label>
+                      <input type="tel" value={form.phone} onChange={(e) => set({ phone: e.target.value })} className={fieldClass} />
+                    </div>
+                  </div>
+
+                  {isAssessment && (
+                    <div className="space-y-5 border-t border-border pt-5">
+                      <p className="text-sm font-semibold uppercase tracking-widest text-primary">Existing Product Assessment</p>
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        <div>
+                          <label className={labelClass}>Product Name *</label>
+                          <input type="text" required value={form.productName} onChange={(e) => set({ productName: e.target.value })} className={fieldClass} />
+                        </div>
+                        <Select required label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
+                        <Select required label="Current Product Status" value={form.productStatus} options={productStatuses} onChange={(v) => set({ productStatus: v })} />
+                        <Select required label="NPN Status" value={form.npnStatus} options={npnStatuses} onChange={(v) => set({ npnStatus: v })} />
+                        <Select required label="Current Manufacturing Situation" value={form.manufacturingSituation} options={manufacturingSituations} onChange={(v) => set({ manufacturingSituation: v })} />
+                        <Select required label="Primary Reason for Assessment" value={form.assessmentReason} options={assessmentReasons} onChange={(v) => set({ assessmentReason: v })} />
+                        <Select required label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
+                      </div>
+                      <p className="text-xs leading-relaxed text-muted-foreground">
+                        Please do not submit proprietary formulas, exact ingredient percentages or confidential manufacturing documents at this stage. We will arrange a confidential exchange when appropriate.
+                      </p>
+                    </div>
+                  )}
+
+                  {isNewProduct && (
+                    <div className="space-y-5 border-t border-border pt-5">
+                      <p className="text-sm font-semibold uppercase tracking-widest text-primary">New Product Development</p>
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        <Select required label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
+                        <Select required label="Development Stage" value={form.developmentStage} options={developmentStages} onChange={(v) => set({ developmentStage: v })} />
+                        <Select required label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
+                      </div>
+                    </div>
+                  )}
+
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Message *</label>
+                    <label className={labelClass}>
+                      {isAssessment ? "Additional Details *" : isNewProduct ? "Project Details *" : "Message *"}
+                    </label>
                     <textarea
                       required
                       rows={5}
                       value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                      onChange={(e) => set({ message: e.target.value })}
+                      className={`${fieldClass} resize-none`}
                     />
                   </div>
-                  <Button type="submit" size="lg">
-                    Send Message
+                  <Button type="submit" size="lg" disabled={submitting}>
+                    {submitting ? "Sending…" : "Send Message"}
                   </Button>
                 </form>
               </div>
