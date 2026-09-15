@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      inquiries: {
+        Row: {
+          assessment_reason: string | null
+          company: string | null
+          created_at: string
+          details: string | null
+          development_stage: string | null
+          email: string
+          estimated_volume: string | null
+          id: string
+          inquiry_type: string
+          manufacturing_situation: string | null
+          name: string
+          npn_status: string | null
+          phone: string | null
+          product_name: string | null
+          product_status: string | null
+          product_type: string | null
+        }
+        Insert: {
+          assessment_reason?: string | null
+          company?: string | null
+          created_at?: string
+          details?: string | null
+          development_stage?: string | null
+          email: string
+          estimated_volume?: string | null
+          id?: string
+          inquiry_type: string
+          manufacturing_situation?: string | null
+          name: string
+          npn_status?: string | null
+          phone?: string | null
+          product_name?: string | null
+          product_status?: string | null
+          product_type?: string | null
+        }
+        Update: {
+          assessment_reason?: string | null
+          company?: string | null
+          created_at?: string
+          details?: string | null
+          development_stage?: string | null
+          email?: string
+          estimated_volume?: string | null
+          id?: string
+          inquiry_type?: string
+          manufacturing_situation?: string | null
+          name?: string
+          npn_status?: string | null
+          phone?: string | null
+          product_name?: string | null
+          product_status?: string | null
+          product_type?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
