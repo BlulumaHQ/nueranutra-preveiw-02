@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-// Real source images from nueranutra.com
-import servicesHome3 from "@/assets/services-home-3.jpg";
+import about5 from "@/assets/about-5.jpg";
 import servicesHome1 from "@/assets/services-home-1.jpg";
 import servicesHome2 from "@/assets/services-home-2.jpg";
+import servicesHome3 from "@/assets/services-home-3.jpg";
 import servicesHome4 from "@/assets/services-home-4.jpg";
-import receptionImg from "@/assets/reception.jpg";
-import about5 from "@/assets/about-5.jpg";
-import about1 from "@/assets/about-1.jpg";
-import about3 from "@/assets/about-3.jpg";
-import about4 from "@/assets/about-4.jpg";
 
-// Certificate icons
 import gmpRed from "@/assets/certs/gmp-red.png";
 import cgmp from "@/assets/certs/cgmp.png";
 import usdaOrganic from "@/assets/certs/usda-organic.png";
@@ -22,299 +16,256 @@ import gmpGreen from "@/assets/certs/gmp-green.png";
 import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
 
+const comparisons = [
+  {
+    number: "01",
+    title: "Precision Blend Uniformity",
+    baseline: "Production may depend heavily on standard mixing times and established general process parameters.",
+    standard: "NuEra applies controlled procedures and blend-uniformity verification for complex formulations to support consistent active ingredient distribution throughout production.",
+    line: "Consistency should be verified—not assumed.",
+  },
+  {
+    number: "02",
+    title: "Raw Material Identity",
+    baseline: "Supplier documentation such as a Certificate of Analysis provides important starting information.",
+    standard: "NuEra incorporates incoming material identity verification into its quality-control process before materials are released for manufacturing.",
+    line: "Know what enters the process before it reaches the product.",
+  },
+  {
+    number: "03",
+    title: "Impurity & Contaminant Screening",
+    baseline: "Routine testing often focuses on standard microbial and heavy-metal requirements.",
+    standard: "Product-specific quality programs can evaluate additional relevant risks including chemical impurities, residual solvents, pesticides and degradation products depending on the ingredient and formulation.",
+    line: "Testing should reflect the actual risk profile of the product.",
+  },
+  {
+    number: "04",
+    title: "Stability Assurance",
+    baseline: "Shelf-life decisions can rely heavily on existing ingredient data or generalized expectations.",
+    standard: "Structured stability programs monitor physical and chemical product integrity over time to support specification, potency and shelf-life decisions.",
+    line: "Quality has to last beyond the manufacturing date.",
+  },
+];
+
+const services = [
+  {
+    title: "Turnkey Manufacturing Solutions",
+    body: "End-to-end support from concept to commercialization across capsule filling, tablet pressing and powder blending.",
+    image: servicesHome3,
+    path: "/our-services#turnkey-manufacturing",
+  },
+  {
+    title: "Formulation & Development Support",
+    body: "Ingredient sourcing, optimization and manufacturability guidance for market-ready products.",
+    image: servicesHome1,
+    path: "/our-services#formulation-development",
+  },
+  {
+    title: "Custom Packaging Services",
+    body: "Coordinated bottle, blister, sachet and stick-pak solutions designed for retail readiness.",
+    image: servicesHome2,
+    path: "/our-services#custom-packaging",
+  },
+  {
+    title: "Regulatory & Compliance Guidance",
+    body: "Documentation and regulatory support from pre-launch evaluation through ongoing compliance oversight.",
+    image: servicesHome4,
+    path: "/our-services#regulatory-compliance",
+  },
+];
+
 const certIcons = [
-{ src: gmpRed, alt: "GMP Certified" },
-{ src: cgmp, alt: "cGMP Certified" },
-{ src: usdaOrganic, alt: "USDA Organic" },
-{ src: halal, alt: "IFANCC Halal Certified" },
-{ src: gmpGreen, alt: "GMP Practice Certified" },
-{ src: healthCanada, alt: "Health Canada GMP Certified" },
-{ src: fda, alt: "FDA Registered" }];
+  { src: gmpRed, alt: "GMP Certified" },
+  { src: cgmp, alt: "cGMP Certified" },
+  { src: usdaOrganic, alt: "USDA Organic" },
+  { src: halal, alt: "IFANCC Halal Certified" },
+  { src: gmpGreen, alt: "GMP Practice Certified" },
+  { src: healthCanada, alt: "Health Canada GMP Certified" },
+  { src: fda, alt: "FDA Registered" },
+];
 
-
-const Index = () => {
-  return (
-    <>
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 1 – HERO (full-width image with text overlay, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[85vh] flex items-end">
-        <div className="absolute inset-0">
-          <img src={about5} alt="NuEra Manufacturing Facility" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent" />
-        </div>
-        <div className="container relative z-10 pb-16 md:pb-24 pt-32">
-          <div className="max-w-2xl">
-            <p className="text-secondary font-sans font-semibold text-sm uppercase tracking-widest mb-3">Since 2007</p>
-            <h1 className="text-3xl md:text-5xl lg:text-[3.5rem] font-serif font-bold text-primary-foreground mb-3 leading-tight">
-              GMP-Certified Nutraceutical Manufacturing Partner
-            </h1>
-            <p className="text-base md:text-lg text-primary-foreground/90 font-sans mb-2 font-medium">
-              Speed • Compliance • Scalable Production
-            </p>
-            <p className="text-sm md:text-base text-primary-foreground/75 font-sans mb-8 max-w-xl leading-relaxed">
-              Since 2007, NuEra Nutraceuticals Inc. has supported startup supplement brands and established global companies with scalable, GMP-compliant manufacturing. From formulation to packaging, we deliver precision production and regulatory confidence—so you can launch faster with reduced compliance risk.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button variant="hero" size="lg" asChild>
-                <Link to="/contact-us?type=quote">Request a Quote</Link>
-              </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact-us?type=consultation">Book Consultation</Link>
-              </Button>
-              <Button variant="heroOutline" size="lg" asChild>
-                <Link to="/contact-us?type=formula">Submit Your Formula</Link>
-              </Button>
-            </div>
+const Index = () => (
+  <>
+    <section className="relative min-h-[85vh] flex items-end overflow-hidden">
+      <div className="absolute inset-0">
+        <img src={about5} alt="NuEra Nutraceuticals manufacturing facility" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/20" />
+      </div>
+      <div className="container relative z-10 pb-14 pt-28 md:pb-20 md:pt-36">
+        <div className="max-w-3xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-secondary">The standard beyond the standard</p>
+          <h1 className="mb-5 max-w-3xl text-4xl font-bold leading-tight text-primary-foreground md:text-5xl lg:text-[3.5rem]">
+            Not All Supplement Manufacturing Is Created Equal.
+          </h1>
+          <div className="max-w-2xl space-y-3 text-sm leading-relaxed text-primary-foreground/80 md:text-base">
+            <p>A Site Licence tells you a manufacturer is licensed. What happens every day on the production floor determines the consistency, quality and reliability of your product.</p>
+            <p>At NuEra Nutraceuticals Inc., advanced SOPs, testing, documentation and process control are built into how we manufacture.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 2 – 3 PILLAR HORIZONTAL CARDS (with images, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20">
-        <div className="container">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-            {
-              title: "Startup Supplement Brands",
-              body: "Turnkey guidance, faster timelines, and regulatory-ready documentation designed for first-time launches.",
-              img: servicesHome1
-            },
-            {
-              title: "Established Global Brands",
-              body: "Scalable high-volume production with disciplined GMP processes and export-ready documentation.",
-              img: servicesHome3
-            },
-            {
-              title: "Quality & Sustainability",
-              body: "Documented quality control, controlled manufacturing flow, and responsible production standards that protect brand integrity.",
-              img: receptionImg
-            }].
-            map((card) =>
-            <div key={card.title} className="group">
-                <div className="h-56 overflow-hidden rounded-lg mb-5">
-                  <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <h3 className="text-xl font-serif font-bold text-foreground mb-2">{card.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{card.body}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 3 – CAPABILITY GRID (stories-style: 1 large left + 3 small right, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 section-light">
-        <div className="container">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-10">
-            Engineering Manufacturing Precision
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Large featured card */}
-            <div className="group relative overflow-hidden rounded-lg">
-              <div className="h-full min-h-[400px] overflow-hidden">
-                <img alt="High-Speed Encapsulation" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/lovable-uploads/19fab4ee-8d11-40b4-820d-d761b04d0784.jpg" />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-primary/90 to-transparent">
-                <p className="text-secondary text-xs font-semibold uppercase tracking-wider mb-1">Manufacturing</p>
-                <h3 className="text-xl font-serif font-bold text-primary-foreground mb-1">High-Speed Encapsulation</h3>
-                <p className="text-primary-foreground/80 text-sm">5 high-speed encapsulation lines engineered for consistency, throughput, and repeatable quality.</p>
-              </div>
-            </div>
-            {/* 3 smaller cards in right column */}
-            <div className="grid gap-6">
-              {[
-              {
-                title: "Advanced Tableting",
-                body: "3 tabletting lines plus pharmaceutical-grade coating drum capability for finish quality and stability.",
-                img: servicesHome4,
-                tag: "Manufacturing"
-              },
-              {
-                title: "Automated Bottling & Packaging",
-                body: "2 automated bottling lines with blister, sachet, and stick-pak options for modern consumer formats.",
-                img: servicesHome2,
-                tag: "Packaging"
-              },
-              {
-                title: "Powder Blending & Custom Formulation",
-                body: "3 powder blenders in multiple capacities supporting custom formulas and scalable runs.",
-                img: servicesHome1,
-                tag: "Formulation"
-              }].
-              map((card) =>
-              <div key={card.title} className="group flex gap-4 items-start">
-                  <div className="w-32 h-24 shrink-0 overflow-hidden rounded-lg">
-                    <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div>
-                    <p className="text-secondary text-xs font-semibold uppercase tracking-wider mb-1">{card.tag}</p>
-                    <h3 className="text-sm font-serif font-bold text-foreground mb-1">{card.title}</h3>
-                    <p className="text-muted-foreground text-xs leading-relaxed">{card.body}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="mt-8">
-            <Button variant="default" asChild className="bg-primary text-primary-foreground">
-              <Link to="/our-services">Explore Our Capabilities</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 4 – ABOUT SPLIT BLOCK (bg color left text, image right, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative">
-        <div className="grid md:grid-cols-2 min-h-[500px]">
-          {/* Left: colored background with text */}
-          <div className="bg-primary flex items-center p-10 md:p-16 lg:p-20">
-            <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground mb-6">Built on Trust Since 2007</h2>
-              <p className="text-primary-foreground/80 leading-relaxed mb-8">
-                NuEra Nutraceuticals Inc. is a proudly Canadian nutraceutical manufacturer committed to quality, innovation, and trust. We provide GMP-compliant contract manufacturing solutions that combine technical precision with responsive, partnership-driven service—helping brands bring safe, compliant products to market with confidence.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button variant="heroOutline" asChild>
-                  <Link to="/about-us">Who We Are</Link>
-                </Button>
-                <Button variant="heroOutline" asChild>
-                  <Link to="/about-us#facility">Our Facility</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-          {/* Right: image */}
-          <div className="h-64 md:h-auto overflow-hidden">
-            <img src={receptionImg} alt="NuEra Facility Reception" className="w-full h-full object-cover" />
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 5 – PIPELINE SPLIT BLOCK (image left, text right, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative">
-        <div className="grid md:grid-cols-2 min-h-[500px]">
-          {/* Left: image */}
-          <div className="h-64 md:h-auto overflow-hidden">
-            <img src={about1} alt="Manufacturing Pipeline" className="w-full h-full object-cover" />
-          </div>
-          {/* Right: colored background with text */}
-          <div className="bg-secondary flex items-center p-10 md:p-16 lg:p-20">
-            <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-secondary-foreground mb-6">From Concept to Commercialization</h2>
-              <p className="text-secondary-foreground/80 leading-relaxed mb-8">
-                Our structured manufacturing pipeline is designed to reduce delays, strengthen documentation integrity, and accelerate time to market—without compromising compliance.
-              </p>
-              <Button variant="heroOutline" asChild>
-                <Link to="/our-services#process">View Our Process <ArrowRight size={16} /></Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 6 – REGULATORY & COMPLIANCE SPLIT BLOCK (bg left text, image right, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="relative">
-        <div className="grid md:grid-cols-2 min-h-[500px]">
-          {/* Left: colored background */}
-          <div className="bg-primary flex items-center p-10 md:p-16 lg:p-20">
-            <div className="max-w-lg">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground mb-6">Regulatory & Compliance Leadership</h2>
-              <p className="text-primary-foreground/80 text-sm leading-relaxed mb-8">
-                Navigating regulatory requirements in the nutraceutical industry requires precision, documentation discipline, and current knowledge of domestic and international standards. Our Regulatory & Compliance team supports Health Canada NPN applications, U.S. FDA facility alignment, ingredient verification, label compliance review, and permissible health claim guidance. We assist in preparing Master Manufacturing Records, Certificates of Analysis, stability documentation, and export documentation to ensure products meet all required frameworks. From pre-launch evaluation to ongoing compliance oversight, we reduce regulatory risk and accelerate market entry.
-              </p>
-              <Button variant="heroOutline" asChild>
-                <Link to="/contact-us?type=formula&subject=Product+Development">Start Your Product Development</Link>
-              </Button>
-            </div>
-          </div>
-          {/* Right: image */}
-          <div className="h-64 md:h-auto overflow-hidden">
-            <img src={about3} alt="Quality Control Laboratory" className="w-full h-full object-cover" />
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 7 – GMP-CERTIFIED SOLUTIONS + CERT ICONS
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">GMP-Certified Solutions</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-            Our certifications reflect disciplined manufacturing systems, documented quality control, and compliance readiness for global distribution.
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {certIcons.map((cert) =>
-            <img key={cert.alt} src={cert.src} alt={cert.alt} className="h-20 md:h-24 w-auto object-contain" />
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 8 – FINAL CONVERSION BLOCK (before footer)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 hero-gradient">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary-foreground mb-4">Ready to Launch Your Product?</h2>
-          <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8 leading-relaxed">
-            Get a manufacturing partner built for precision, compliance, and scalable growth.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Button variant="hero" size="lg" asChild>
-              <Link to="/contact-us?type=quote">Request a Quote</Link>
+              <Link to="/contact-us?type=new-product">Start a New Product</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact-us?type=consultation">Book Consultation</Link>
-            </Button>
-            <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact-us?type=formula">Submit Your Formula</Link>
+              <Link to="/contact-us?type=product-review">Review Your Current Product</Link>
             </Button>
           </div>
+          <p className="mt-8 border-l-2 border-secondary pl-4 text-sm font-semibold leading-relaxed text-primary-foreground">
+            Licensed is the baseline.<br />Execution is the difference.
+          </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-           SECTION 9 – RELATED LINKS GRID (3 cards, like Merck)
-           ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 section-light">
-        <div className="container">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-10">Related Links</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-             { title: "Our Services", desc: "Explore our turnkey manufacturing, formulation, and packaging capabilities.", path: "/our-services", img: servicesHome3 },
-             { title: "About Us", desc: "Learn about our history, facility, and commitment to quality since 2007.", path: "/about-us", img: about4 },
-             { title: "Contact Us", desc: "Get in touch for quotes, consultations, or to submit your product formula.", path: "/contact-us", img: servicesHome2 }].
-            map((card) =>
-            <Link to={card.path} key={card.title} className="group block overflow-hidden rounded-lg bg-card hover:shadow-lg transition-shadow">
-                <div className="h-48 overflow-hidden">
-                  <img src={card.img} alt={card.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+    <section className="py-16 md:py-24">
+      <div className="container grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div>
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary">Licence vs. daily execution</p>
+          <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">
+            A Licence Tells You Where the Standard Starts.<br className="hidden md:block" /> Our SOPs Show You How Far We Take It.
+          </h2>
+        </div>
+        <div>
+          <p className="mb-6 leading-relaxed text-muted-foreground">
+            Meeting regulatory requirements is essential. But for a brand owner, compliance alone does not answer the most important manufacturing questions:
+          </p>
+          <ul className="divide-y divide-border border-y border-border text-sm font-medium text-foreground md:text-base">
+            <li className="py-3">Is the blend actually uniform?</li>
+            <li className="py-3">Were incoming ingredients independently verified?</li>
+            <li className="py-3">Are relevant contaminants and impurities being evaluated?</li>
+            <li className="py-3">Will the formulation remain within specification throughout its intended shelf life?</li>
+          </ul>
+          <p className="mt-6 leading-relaxed text-muted-foreground">That is where NuEra’s day-to-day quality systems become important.</p>
+        </div>
+      </div>
+    </section>
+
+    <section className="section-light py-16 md:py-24">
+      <div className="container">
+        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">The NuEra standard</p>
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">The Baseline vs. The NuEra Standard</h2>
+          </div>
+          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Four practical areas where disciplined daily execution supports product consistency and brand confidence.</p>
+        </div>
+        <div className="space-y-6">
+          {comparisons.map((item, index) => (
+            <article key={item.number} className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+              <div className="grid lg:grid-cols-[0.55fr_1fr_1.25fr]">
+                <div className="border-b border-border p-6 lg:border-b-0 lg:border-r lg:p-8">
+                  <span className="text-3xl font-bold text-secondary">{item.number}</span>
+                  <h3 className="mt-4 text-xl font-bold text-foreground">{item.title}</h3>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-serif font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{card.title}</h3>
-                  <p className="text-muted-foreground text-sm">{card.desc}</p>
-                  <span className="inline-flex items-center gap-1 mt-3 text-sm font-medium text-primary">
-                    Learn more <ArrowRight size={14} />
-                  </span>
+                <div className="border-b border-border p-6 lg:border-b-0 lg:border-r lg:p-8">
+                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">The baseline</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{item.baseline}</p>
                 </div>
-              </Link>
-            )}
+                <div className={`p-6 lg:p-8 ${index % 2 === 0 ? "bg-primary/[0.04]" : "bg-secondary/[0.08]"}`}>
+                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">The NuEra standard</p>
+                  <p className="text-sm leading-relaxed text-foreground">{item.standard}</p>
+                  <p className="mt-5 border-l-2 border-secondary pl-3 text-sm font-semibold text-primary">{item.line}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-primary py-16 md:py-24">
+      <div className="container">
+        <div className="max-w-3xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-secondary">Your formula. Your label. Your reputation.</p>
+          <h2 className="mb-6 text-3xl font-bold text-primary-foreground md:text-4xl">Manufacturing Quality Becomes Brand Risk.</h2>
+          <div className="space-y-3 leading-relaxed text-primary-foreground/80">
+            <p>A product can look perfect on a specification sheet and still create problems if execution varies during manufacturing.</p>
+            <p>For brand owners, strong manufacturing controls help reduce unnecessary exposure to inconsistent batches, documentation issues, delays and preventable quality failures.</p>
           </div>
         </div>
-      </section>
-    </>);
+        <div className="mt-12 grid gap-px overflow-hidden rounded-lg bg-primary-foreground/20 md:grid-cols-3">
+          {[
+            ["Audit-ready", "Transparent manufacturing and quality records that support traceability and review."],
+            ["Consistent", "Controlled procedures designed to support repeatability from development through commercial production."],
+            ["Risk-aware", "Testing and documentation strategies designed around the characteristics of the formulation and its ingredients."],
+          ].map(([title, body]) => (
+            <div key={title} className="bg-primary p-7 md:p-8">
+              <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-secondary">{title}</h3>
+              <p className="text-sm leading-relaxed text-primary-foreground/80">{body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
 
-};
+    <section className="py-16 md:py-24">
+      <div className="container">
+        <h2 className="mb-10 text-3xl font-bold text-foreground md:text-4xl">Where Are You in Your Product Journey?</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          {[
+            { number: "Path 01", title: "I’m Creating a New Product", body: "Work with NuEra on formulation, ingredient sourcing, production planning, packaging and regulatory considerations from the beginning.", cta: "Develop a New Product", type: "new-product" },
+            { number: "Path 02", title: "I Already Have a Product", body: "Bring us your current formulation or manufacturing requirements and discuss quality, testing, production and opportunities for improvement.", cta: "Review My Product", type: "product-review" },
+          ].map((path) => (
+            <article key={path.number} className="flex min-h-[320px] flex-col rounded-lg border border-border bg-card p-8 shadow-sm md:p-10">
+              <p className="mb-8 text-xs font-bold uppercase tracking-widest text-primary">{path.number}</p>
+              <h3 className="mb-4 text-2xl font-bold text-foreground">{path.title}</h3>
+              <p className="mb-8 leading-relaxed text-muted-foreground">{path.body}</p>
+              <Button className="mt-auto w-fit" asChild>
+                <Link to={`/contact-us?type=${path.type}`}>{path.cta}<ArrowRight size={16} /></Link>
+              </Button>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="section-light py-16 md:py-24">
+      <div className="container">
+        <div className="mb-10 max-w-3xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Complete manufacturing support</p>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Everything You Need to Move From Formula to Market.</h2>
+          <p className="leading-relaxed text-muted-foreground">Advanced quality systems mean more when they are backed by complete manufacturing capabilities. NuEra supports clients across product development, manufacturing, packaging and regulatory requirements.</p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service) => (
+            <Link key={service.title} to={service.path} className="group overflow-hidden rounded-lg bg-card shadow-sm transition-shadow hover:shadow-lg">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img src={service.image} alt={service.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              <div className="p-6">
+                <h3 className="mb-3 text-lg font-bold text-foreground transition-colors group-hover:text-primary">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{service.body}</p>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore service <ArrowRight size={14} /></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="py-16 md:py-24">
+      <div className="container text-center">
+        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Certification is the foundation.</p>
+        <h2 className="mb-5 text-3xl font-bold text-foreground md:text-4xl">Our Daily Standard Is What Builds On It.</h2>
+        <p className="mx-auto mb-12 max-w-3xl leading-relaxed text-muted-foreground">Licensing and GMP requirements establish the regulatory foundation. NuEra’s differentiation comes from how procedures, testing, documentation and process control are applied throughout day-to-day manufacturing.</p>
+        <div className="flex flex-wrap items-center justify-center gap-7 md:gap-11">
+          {certIcons.map((cert) => <img key={cert.alt} src={cert.src} alt={cert.alt} loading="lazy" className="h-16 w-auto object-contain md:h-20" />)}
+        </div>
+      </div>
+    </section>
+
+    <section className="hero-gradient py-16 md:py-24">
+      <div className="container text-center">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-secondary">Let’s look at your product differently</p>
+        <h2 className="mb-5 text-3xl font-bold text-primary-foreground md:text-4xl">Ready to Raise Your Manufacturing Standard?</h2>
+        <p className="mx-auto mb-8 max-w-2xl leading-relaxed text-primary-foreground/80">Whether you are developing a new formulation or evaluating an existing product, speak with NuEra about manufacturing, quality control, testing, documentation and compliance.</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button variant="hero" size="lg" asChild><Link to="/contact-us?type=general">Schedule a Quality &amp; Technical Consultation</Link></Button>
+          <Button variant="heroOutline" size="lg" asChild><Link to="/contact-us?type=new-product">Start a New Product</Link></Button>
+        </div>
+        <Link to="/contact-us?type=product-review" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-primary-foreground underline underline-offset-4">Review an Existing Product <ArrowRight size={14} /></Link>
+      </div>
+    </section>
+  </>
+);
 
 export default Index;
