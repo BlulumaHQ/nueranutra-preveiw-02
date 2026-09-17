@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Col 1: Logo + Desc */}
           <div>
-            <img src={logo} alt="NuEra Nutraceuticals Inc." className="h-12 w-auto mb-4 brightness-0 invert" />
+            <img src={logo} alt="NuEra Nutraceuticals Inc." className="h-16 w-auto mb-4 brightness-0 invert" />
             <p className="text-sm text-primary-foreground/80">
               GMP-certified nutraceutical contract manufacturer delivering precision production and regulatory confidence since 2007.
             </p>
