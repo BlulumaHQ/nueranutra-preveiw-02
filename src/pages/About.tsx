@@ -17,6 +17,7 @@ const milestones = [
   { year: "2019", event: "Obtained USDA Organic, Halal, and additional GMP certifications." },
   { year: "2022", event: "Upgraded to 5 high-speed encapsulation lines and added sachet/blister packaging." },
   { year: "2025", event: "Continuing to serve startup and global brands with precision manufacturing." },
+  { year: "2026", event: "Phase 4 expansion, stay tuned" },
 ];
 
 const facilityStats = [

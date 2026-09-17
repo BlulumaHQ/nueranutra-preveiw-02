@@ -1,8 +1,11 @@
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import about5 from "@/assets/about-5.jpg";
+import heroSupplementPackaging from "@/assets/hero-supplement-packaging.jpg";
+import heroProductionMachinery from "@/assets/hero-production-machinery.jpg";
 import servicesHome1 from "@/assets/services-home-1.jpg";
 import servicesHome2 from "@/assets/services-home-2.jpg";
 import servicesHome3 from "@/assets/services-home-3.jpg";
@@ -15,6 +18,13 @@ import halal from "@/assets/certs/halal.png";
 import gmpGreen from "@/assets/certs/gmp-green.png";
 import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
+import kosherLogo from "@/assets/kosher-logo.png";
+
+const heroSlides = [
+  { src: about5, alt: "NuEra Nutraceuticals manufacturing facility", position: "object-center" },
+  { src: heroSupplementPackaging, alt: "Premium nutraceutical product packaging", position: "object-center" },
+  { src: heroProductionMachinery, alt: "Organized nutraceutical production equipment", position: "object-center" },
+];
 
 const comparisons = [
   {
@@ -82,16 +92,48 @@ const certIcons = [
   { src: gmpGreen, alt: "GMP Practice Certified" },
   { src: healthCanada, alt: "Health Canada GMP Certified" },
   { src: fda, alt: "FDA Registered" },
+  { src: kosherLogo, alt: "Kosher Certified" },
 ];
 
-const Index = () => (
+const Index = () => {
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+
+  const showNextHeroSlide = useCallback(() => {
+    setCurrentHeroSlide((current) => (current + 1) % heroSlides.length);
+  }, []);
+
+  const showPreviousHeroSlide = useCallback(() => {
+    setCurrentHeroSlide((current) => (current - 1 + heroSlides.length) % heroSlides.length);
+  }, []);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return undefined;
+
+    const timer = window.setInterval(showNextHeroSlide, 5500);
+    return () => window.clearInterval(timer);
+  }, [showNextHeroSlide]);
+
+  return (
   <>
     <section className="relative min-h-[85vh] flex items-end overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={about5} alt="NuEra Nutraceuticals manufacturing facility" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/20" />
+      <div className="absolute inset-0" aria-live="polite">
+        {heroSlides.map((slide, index) => (
+          <img
+            key={slide.src}
+            src={slide.src}
+            alt={index === currentHeroSlide ? slide.alt : ""}
+            aria-hidden={index !== currentHeroSlide}
+            width={1536}
+            height={1024}
+            className={`absolute inset-0 h-full w-full object-cover ${slide.position} transition-opacity duration-1000 ease-in-out motion-reduce:transition-none ${
+              index === currentHeroSlide ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/25" />
       </div>
-      <div className="container relative z-10 pb-14 pt-28 md:pb-20 md:pt-36">
+      <div className="container relative z-10 pb-24 pt-28 md:pb-24 md:pt-36">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-secondary">The standard beyond the standard</p>
           <h1 className="mb-5 max-w-3xl text-4xl font-bold leading-tight text-primary-foreground md:text-5xl lg:text-[3.5rem]">
@@ -99,7 +141,7 @@ const Index = () => (
           </h1>
           <div className="max-w-2xl space-y-3 text-sm leading-relaxed text-primary-foreground/80 md:text-base">
             <p>A Site Licence tells you a manufacturer is licensed. What happens every day on the production floor determines the consistency, quality and reliability of your product.</p>
-            <p>At NuEra Nutraceuticals Inc., advanced SOPs, testing, documentation and process control are built into how we manufacture.</p>
+            <p>At NuEra Nutraceuticals, advanced SOPs, testing, documentation and process control are built into how we manufacture.</p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button variant="hero" size="lg" asChild>
@@ -112,6 +154,33 @@ const Index = () => (
           <p className="mt-8 border-l-2 border-secondary pl-4 text-sm font-semibold leading-relaxed text-primary-foreground">
             Licensed is the baseline.<br />Execution is the difference.
           </p>
+        </div>
+      </div>
+      <div className="absolute inset-x-0 bottom-5 z-20">
+        <div className="container flex items-center justify-between">
+          <div className="flex gap-2" role="tablist" aria-label="Hero slides">
+            {heroSlides.map((slide, index) => (
+              <button
+                key={slide.alt}
+                type="button"
+                onClick={() => setCurrentHeroSlide(index)}
+                className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-primary ${
+                  index === currentHeroSlide ? "w-8 bg-primary-foreground" : "w-2 bg-primary-foreground/50 hover:bg-primary-foreground/80"
+                }`}
+                role="tab"
+                aria-selected={index === currentHeroSlide}
+                aria-label={`Show hero slide ${index + 1}`}
+              />
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <Button type="button" variant="heroOutline" size="icon" onClick={showPreviousHeroSlide} aria-label="Previous hero slide" className="rounded-full border-primary-foreground/60 bg-primary/20">
+              <ChevronLeft />
+            </Button>
+            <Button type="button" variant="heroOutline" size="icon" onClick={showNextHeroSlide} aria-label="Next hero slide" className="rounded-full border-primary-foreground/60 bg-primary/20">
+              <ChevronRight />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -139,18 +208,19 @@ const Index = () => (
       </div>
     </section>
 
-    <section className="section-light py-16 md:py-24">
+    <section className="relative border-y border-border bg-muted/40 py-16 md:py-24">
+      <div className="absolute inset-x-0 top-0 h-1 bg-secondary" />
       <div className="container">
-        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">The NuEra standard</p>
+            <p className="mb-3 inline-flex border-l-4 border-secondary pl-3 text-sm font-bold uppercase tracking-widest text-primary">The NuEra Standard</p>
             <h2 className="text-3xl font-bold text-foreground md:text-4xl">The Baseline vs. The NuEra Standard</h2>
           </div>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Four practical areas where disciplined daily execution supports product consistency and brand confidence.</p>
         </div>
         <div className="space-y-6">
           {comparisons.map((item, index) => (
-            <article key={item.number} className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+            <article key={item.number} className="overflow-hidden rounded-lg border border-border bg-card shadow-md transition-shadow duration-300 hover:shadow-lg">
               <div className="grid lg:grid-cols-[0.55fr_1fr_1.25fr]">
                 <div className="border-b border-border p-6 lg:border-b-0 lg:border-r lg:p-8">
                   <span className="text-3xl font-bold text-secondary">{item.number}</span>
@@ -160,8 +230,8 @@ const Index = () => (
                   <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">The baseline</p>
                   <p className="text-sm leading-relaxed text-muted-foreground">{item.baseline}</p>
                 </div>
-                <div className={`p-6 lg:p-8 ${index % 2 === 0 ? "bg-primary/[0.04]" : "bg-secondary/[0.08]"}`}>
-                  <p className="mb-3 text-xs font-bold uppercase tracking-widest text-primary">The NuEra standard</p>
+                <div className={`relative border-l-4 border-secondary p-6 lg:p-8 ${index % 2 === 0 ? "bg-primary/[0.06]" : "bg-secondary/[0.12]"}`}>
+                  <p className="mb-3 text-xs font-extrabold uppercase tracking-widest text-primary">The NuEra Standard</p>
                   <p className="text-sm leading-relaxed text-foreground">{item.standard}</p>
                   <p className="mt-5 border-l-2 border-secondary pl-3 text-sm font-semibold text-primary">{item.line}</p>
                 </div>
@@ -254,8 +324,8 @@ const Index = () => (
         <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Certification is the foundation.</p>
         <h2 className="mb-5 text-3xl font-bold text-foreground md:text-4xl">Our Daily Standard Is What Builds On It.</h2>
         <p className="mx-auto mb-12 max-w-3xl leading-relaxed text-muted-foreground">Licensing and GMP requirements establish the regulatory foundation. NuEra’s differentiation comes from how procedures, testing, documentation and process control are applied throughout day-to-day manufacturing.</p>
-        <div className="flex flex-wrap items-center justify-center gap-7 md:gap-11">
-          {certIcons.map((cert) => <img key={cert.alt} src={cert.src} alt={cert.alt} loading="lazy" className="h-16 w-auto object-contain md:h-20" />)}
+        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-8 sm:grid-cols-4 lg:grid-cols-8 lg:gap-x-8">
+          {certIcons.map((cert) => <img key={cert.alt} src={cert.src} alt={cert.alt} loading="lazy" className="h-16 w-full max-w-28 object-contain md:h-20" />)}
         </div>
       </div>
     </section>
@@ -273,6 +343,7 @@ const Index = () => (
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default Index;

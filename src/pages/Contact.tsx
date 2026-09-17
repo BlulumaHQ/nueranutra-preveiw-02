@@ -14,7 +14,7 @@ const inquiryTypes = [
   { value: "general", label: "General Inquiry" },
 ];
 
-const productTypes = ["Capsule", "Tablet", "Powder", "Liquid", "Softgel", "Other"];
+const productTypes = ["Capsule", "Tablet", "Powder", "Softgel", "Other"];
 const productStatuses = [
   "Currently in Market",
   "Currently in Production",
