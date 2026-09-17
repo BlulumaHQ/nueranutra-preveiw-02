@@ -21,9 +21,9 @@ import fda from "@/assets/certs/fda.png";
 import kosherLogo from "@/assets/kosher-logo.png";
 
 const heroSlides = [
-  { src: about5, alt: "NuEra Nutraceuticals manufacturing facility", position: "object-center" },
   { src: heroSupplementPackaging, alt: "Premium nutraceutical product packaging", position: "object-center" },
   { src: heroProductionMachinery, alt: "Organized nutraceutical production equipment", position: "object-center" },
+  { src: about5, alt: "NuEra Nutraceuticals manufacturing facility", position: "object-center" },
 ];
 
 const comparisons = [
