@@ -18,7 +18,7 @@ import halal from "@/assets/certs/halal.png";
 import gmpGreen from "@/assets/certs/gmp-green.png";
 import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
-import kosherAsset from "@/assets/Kosher-logo.png.asset.json";
+import kosherLogo from "@/assets/kosher-logo.png";
 
 const heroSlides = [
   { src: about5, alt: "NuEra Nutraceuticals manufacturing facility", position: "object-center" },
@@ -92,7 +92,7 @@ const certIcons = [
   { src: gmpGreen, alt: "GMP Practice Certified" },
   { src: healthCanada, alt: "Health Canada GMP Certified" },
   { src: fda, alt: "FDA Registered" },
-  { src: kosherAsset.url, alt: "Kosher Certified" },
+  { src: kosherLogo, alt: "Kosher Certified" },
 ];
 
 const Index = () => {

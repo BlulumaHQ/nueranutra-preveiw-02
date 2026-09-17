@@ -15,4 +15,4 @@
 - [x] Add the supplied Kosher certification mark
 - [x] Remove Liquid from product options
 - [x] Add the 2026 About timeline milestone
-- [ ] Verify responsive visuals, brand spelling, lead flows, and build health
+- [x] Verify responsive visuals, brand spelling, lead flows, and build health
