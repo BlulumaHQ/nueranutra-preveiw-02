@@ -141,7 +141,7 @@ const Index = () => {
           </h1>
           <div className="max-w-2xl space-y-3 text-sm leading-relaxed text-primary-foreground/80 md:text-base">
             <p>A Site Licence tells you a manufacturer is licensed. What happens every day on the production floor determines the consistency, quality and reliability of your product.</p>
-            <p>At NuEra Nutraceuticals Inc., advanced SOPs, testing, documentation and process control are built into how we manufacture.</p>
+            <p>At NuEra Nutraceuticals, advanced SOPs, testing, documentation and process control are built into how we manufacture.</p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button variant="hero" size="lg" asChild>
