@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Building, Award, Users, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import servicesHome3 from "@/assets/services-home-3.jpg";
-import about1 from "@/assets/about-1.jpg";
 import about3 from "@/assets/about-3.jpg";
 import about4 from "@/assets/about-4.jpg";
 import about5 from "@/assets/about-5.jpg";
