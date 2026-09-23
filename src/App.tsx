@@ -3,33 +3,50 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import type { ReactNode } from "react";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { LOCALES } from "./i18n/config";
+import { LocaleProvider } from "./i18n/LocaleProvider";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+export const AppRoutes = () => (
+  <LocaleProvider>
+    <Layout>
+      <Routes caseSensitive>
+        {LOCALES.map(({ prefix, code }) => [
+          <Route key={`${code}-home`} path={prefix ? `${prefix}/` : "/"} element={<Index />} caseSensitive />,
+          <Route key={`${code}-services`} path={`${prefix}/our-services`} element={<Services />} caseSensitive />,
+          <Route key={`${code}-about`} path={`${prefix}/about-us`} element={<About />} caseSensitive />,
+          <Route key={`${code}-contact`} path={`${prefix}/contact-us`} element={<Contact />} caseSensitive />,
+        ])}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
+  </LocaleProvider>
+);
+
+export const AppProviders = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/our-services" element={<Services />} />
-            <Route path="/about-us" element={<About />} />
-            <Route path="/contact-us" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      {children}
     </TooltipProvider>
   </QueryClientProvider>
+);
+
+const App = () => (
+  <AppProviders>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  </AppProviders>
 );
 
 export default App;

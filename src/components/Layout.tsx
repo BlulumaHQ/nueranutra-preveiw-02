@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import SeoHead from "@/seo/SeoHead";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { pathname, hash } = useLocation();
@@ -24,6 +25,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <SeoHead />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />

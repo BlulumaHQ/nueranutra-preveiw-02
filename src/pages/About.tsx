@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { fmt } from "@/i18n/dictionaries";
 import { Building, Award, Users, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 import about3 from "@/assets/about-3.jpg";
@@ -9,38 +11,19 @@ import about5 from "@/assets/about-5.jpg";
 import receptionArea from "@/assets/nuera-nutraceutical-reception-area.webp";
 import officeBuilding from "@/assets/nuera-nutraceutical-office-building.webp";
 
-const milestones = [
-  { year: "2008", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
-  { year: "2010", event: "Achieved GMP certification and expanded encapsulation capacity." },
-  { year: "2013", event: "Added tableting lines and pharmaceutical-grade coating capabilities." },
-  { year: "2016", event: "Expanded facility to 30,000 sq. ft. with automated bottling lines." },
-  { year: "2019", event: "Obtained USDA Organic, Halal, and additional GMP certifications." },
-  { year: "2022", event: "Upgraded to 5 high-speed encapsulation lines and added sachet/blister packaging." },
-  { year: "2025", event: "Continuing to serve startup and global brands with precision manufacturing." },
-  { year: "2026", event: "Phase 4 expansion, stay tuned" },
-];
-
-const facilityStats = [
-  { label: "Facility Size", value: "30,000 sq. ft." },
-  { label: "Encapsulation Lines", value: "5 High-Speed" },
-  { label: "Tabletting Lines", value: "3 Lines" },
-  { label: "Coating Drum", value: "1 Pharma-Grade" },
-  { label: "Powder Blenders", value: "3 (Various Capacities)" },
-  { label: "Bottling Lines", value: "2 Automated" },
-  { label: "Sachet Filling", value: "1 High-Speed Line" },
-  { label: "Blister Packaging", value: "2 High-Speed Lines" },
-];
-
-const slideshowImages = [
-  { src: about5, alt: "NuEra manufacturing floor" },
-  { src: receptionArea, alt: "NuEra Nutraceutical reception and office interior" },
-  { src: about3, alt: "NuEra production equipment" },
-  { src: officeBuilding, alt: "NuEra Nutraceutical office and manufacturing facility" },
-  { src: about4, alt: "NuEra packaging area" },
+const milestoneYears = ["2008", "2010", "2013", "2016", "2019", "2022", "2025", "2026"];
+const slideshowImages = [about5, receptionArea, about3, officeBuilding, about4];
+const valueIcons = [
+  <Award className="text-accent" size={32} />,
+  <Users className="text-accent" size={32} />,
+  <Building className="text-accent" size={32} />,
+  <Calendar className="text-accent" size={32} />,
 ];
 
 const About = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t, lp } = useLocale();
+  const a = t.about;
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slideshowImages.length);
@@ -60,13 +43,13 @@ const About = () => {
       {/* Hero Banner */}
       <section className="relative py-20 md:py-32">
         <div className="absolute inset-0">
-          <img src={servicesHome3} alt="About NuEra" className="w-full h-full object-cover" />
+          <img src={servicesHome3} alt={a.heroAlt} className="w-full h-full object-cover" />
           <div className="absolute inset-0 hero-gradient opacity-90" />
         </div>
         <div className="container relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">About Us</h1>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">{a.title}</h1>
           <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-            Precision, Integrity & Quality Packaged Together Since 2008
+            {a.tagline}
           </p>
         </div>
       </section>
@@ -76,21 +59,13 @@ const About = () => {
         <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-serif font-bold text-foreground mb-6">Who We Are</h2>
+              <h2 className="text-3xl font-serif font-bold text-foreground mb-6">{a.whoTitle}</h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  NuEra Nutraceuticals Inc. is a proudly Canadian nutraceutical contract manufacturer headquartered in Richmond, British Columbia. Since our founding in 2008, we have been committed to delivering GMP-compliant manufacturing solutions that combine technical precision with responsive, partnership-driven service.
-                </p>
-                <p>
-                  We serve a diverse portfolio of clients—from startup supplement brands launching their first product to established global companies scaling production. Our approach is built on transparency, regulatory confidence, and the pursuit of manufacturing excellence.
-                </p>
-                <p>
-                  Our team brings deep expertise in formulation development, encapsulation, tableting, powder blending, packaging, and regulatory compliance. Every product that leaves our facility is backed by documented quality controls, rigorous testing protocols, and a commitment to brand integrity.
-                </p>
+                {a.who.map((para) => <p key={para}>{para}</p>)}
               </div>
             </div>
             <div>
-              <img alt="NuEra Nutraceutical office and manufacturing facility" className="rounded-lg shadow-lg w-full object-cover" src={officeBuilding} loading="lazy" />
+              <img alt={a.buildingAlt} className="rounded-lg shadow-lg w-full object-cover" src={officeBuilding} loading="lazy" />
             </div>
           </div>
         </div>
@@ -99,16 +74,11 @@ const About = () => {
       {/* Values */}
       <section className="py-16 md:py-24 section-light">
         <div className="container">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-12 text-center">Our Core Values</h2>
+          <h2 className="text-3xl font-serif font-bold text-foreground mb-12 text-center">{a.valuesTitle}</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: <Award className="text-accent" size={32} />, title: "Quality", desc: "Documented quality control at every stage of production." },
-              { icon: <Users className="text-accent" size={32} />, title: "Partnership", desc: "Responsive, transparent service built on trust." },
-              { icon: <Building className="text-accent" size={32} />, title: "Innovation", desc: "Continuous improvement in processes and capabilities." },
-              { icon: <Calendar className="text-accent" size={32} />, title: "Compliance", desc: "Regulatory confidence for domestic and international markets." },
-            ].map((v) => (
+            {a.values.map((v, vi) => (
               <div key={v.title} className="bg-card border border-border rounded-lg p-8 text-center">
-                <div className="flex justify-center mb-4">{v.icon}</div>
+                <div className="flex justify-center mb-4">{valueIcons[vi]}</div>
                 <h3 className="text-lg font-serif font-bold text-foreground mb-2">{v.title}</h3>
                 <p className="text-muted-foreground text-sm">{v.desc}</p>
               </div>
@@ -120,18 +90,18 @@ const About = () => {
       {/* Timeline */}
       <section className="py-16 md:py-24">
         <div className="container">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-12 text-center">Our Journey</h2>
+          <h2 className="text-3xl font-serif font-bold text-foreground mb-12 text-center">{a.journeyTitle}</h2>
           <div className="max-w-3xl mx-auto">
-            {milestones.map((m, i) => (
-              <div key={m.year} className="flex gap-6 mb-8 last:mb-0">
+            {milestoneYears.map((year, i) => (
+              <div key={year} className="flex gap-6 mb-8 last:mb-0">
                 <div className="flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm shrink-0">
-                    {m.year}
+                    {year}
                   </div>
-                  {i < milestones.length - 1 && <div className="w-0.5 flex-1 bg-border mt-2" />}
+                  {i < milestoneYears.length - 1 && <div className="w-0.5 flex-1 bg-border mt-2" />}
                 </div>
                 <div className="pt-3 pb-4">
-                  <p className="text-foreground leading-relaxed">{m.event}</p>
+                  <p className="text-foreground leading-relaxed">{a.milestones[i]}</p>
                 </div>
               </div>
             ))}
@@ -142,9 +112,9 @@ const About = () => {
       {/* Facility */}
       <section id="facility" className="py-16 md:py-24 section-light">
         <div className="container">
-          <h2 className="text-3xl font-serif font-bold text-foreground mb-6">Our Facility</h2>
+          <h2 className="text-3xl font-serif font-bold text-foreground mb-6">{a.facilityTitle}</h2>
           <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
-            Our 30,000 sq. ft. manufacturing facility in Richmond, BC is equipped with state-of-the-art machinery for high-volume, GMP-compliant production across multiple dosage formats.
+            {a.facilityBody}
           </p>
 
           {/* Slideshow */}
@@ -153,8 +123,8 @@ const About = () => {
               {slideshowImages.map((img, index) => (
                 <img
                   key={index}
-                  src={img.src}
-                  alt={img.alt}
+                  src={img}
+                  alt={a.slideAlts[index]}
                   loading="lazy"
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
                     index === currentSlide ? "opacity-100" : "opacity-0"
@@ -166,7 +136,7 @@ const About = () => {
               <button
                 onClick={prevSlide}
                 className="absolute left-3 top-1/2 -translate-y-1/2 bg-background/70 hover:bg-background/90 rounded-full p-2 transition-colors z-10"
-                aria-label="Previous slide"
+                aria-label={a.prevSlide}
               >
                 <ChevronLeft size={24} className="text-foreground" />
               </button>
@@ -175,7 +145,7 @@ const About = () => {
               <button
                 onClick={nextSlide}
                 className="absolute right-3 top-1/2 -translate-y-1/2 bg-background/70 hover:bg-background/90 rounded-full p-2 transition-colors z-10"
-                aria-label="Next slide"
+                aria-label={a.nextSlide}
               >
                 <ChevronRight size={24} className="text-foreground" />
               </button>
@@ -189,7 +159,7 @@ const About = () => {
                     className={`w-3 h-3 rounded-full transition-colors ${
                       index === currentSlide ? "bg-primary" : "bg-background/60"
                     }`}
-                    aria-label={`Go to slide ${index + 1}`}
+                    aria-label={fmt(a.goToSlide, { n: index + 1 })}
                   />
                 ))}
               </div>
@@ -198,7 +168,7 @@ const About = () => {
 
           {/* Equipment Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {facilityStats.map((stat) => (
+            {a.stats.map((stat) => (
               <div key={stat.label} className="bg-card border border-border rounded-lg p-5">
                 <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
                 <p className="text-lg font-bold text-foreground">{stat.value}</p>
@@ -211,16 +181,16 @@ const About = () => {
       {/* CTA */}
       <section className="py-16 md:py-24 hero-gradient text-center">
         <div className="container">
-          <h2 className="text-3xl font-serif font-bold text-primary-foreground mb-4">Partner With Us</h2>
+          <h2 className="text-3xl font-serif font-bold text-primary-foreground mb-4">{a.ctaTitle}</h2>
           <p className="text-primary-foreground/80 max-w-xl mx-auto mb-8">
-            Discover how NuEra can support your product from concept to commercialization.
+            {a.ctaBody}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button variant="hero" size="lg" asChild>
-              <Link to="/contact-us?type=manufacturing">Request a Quote</Link>
+              <Link to={lp("/contact-us?type=manufacturing")}>{a.quote}</Link>
             </Button>
             <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/contact-us?type=general">Book Consultation</Link>
+              <Link to={lp("/contact-us?type=general")}>{a.consult}</Link>
             </Button>
           </div>
         </div>
