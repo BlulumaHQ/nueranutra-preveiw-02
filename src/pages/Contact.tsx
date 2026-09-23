@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import servicesHome3 from "@/assets/services-home-3.jpg";
+import { useLocale } from "@/i18n/LocaleProvider";
 
 const inquiryTypes = [
   { value: "new-product", label: "New Product Development" },
@@ -80,6 +81,8 @@ const Select = ({
   label,
   value,
   options,
+  labels,
+  placeholder,
   onChange,
   required,
   name,
@@ -87,6 +90,8 @@ const Select = ({
   label: string;
   value: string;
   options: string[];
+  labels: string[];
+  placeholder: string;
   onChange: (v: string) => void;
   required?: boolean;
   name: string;
@@ -94,9 +99,9 @@ const Select = ({
   <div>
     <label className={labelClass}>{label}{required ? " *" : ""}</label>
     <select name={name} required={required} value={value} onChange={(e) => onChange(e.target.value)} className={fieldClass}>
-      <option value="">Please select</option>
-      {options.map((o) => (
-        <option key={o} value={o}>{o}</option>
+      <option value="">{placeholder}</option>
+      {options.map((o, i) => (
+        <option key={o} value={o}>{labels[i] ?? o}</option>
       ))}
     </select>
   </div>
@@ -109,6 +114,9 @@ const Contact = () => {
   const [form, setForm] = useState(emptyForm);
   const [submitError, setSubmitError] = useState(false);
   const [botField, setBotField] = useState("");
+  const { t, locale } = useLocale();
+  const c = t.contact;
+  const sel = { placeholder: c.pleaseSelect };
 
   useEffect(() => {
     const type = searchParams.get("type");
@@ -133,6 +141,7 @@ const Contact = () => {
     const data: Record<string, string> = {
       "form-name": NETLIFY_FORM_NAME,
       "bot-field": botField,
+      locale: locale.code,
       inquiry_type: inquiryTypes.find((t) => t.value === form.inquiryType)?.label ?? form.inquiryType,
       name: form.name.trim(),
       company: form.company.trim(),
@@ -164,16 +173,16 @@ const Contact = () => {
     if (error) {
       setSubmitError(true);
       toast({
-        title: "Submission Failed",
-        description: "We could not send your inquiry. Please try again or email enquiry@nueranutra.com.",
+        title: c.toastFailTitle,
+        description: c.submitError,
         variant: "destructive",
       });
       return;
     }
 
     toast({
-      title: "Inquiry Received",
-      description: "Thank you for reaching out. Our team will respond within 1 business day.",
+      title: c.toastOkTitle,
+      description: c.toastOkBody,
     });
     setForm({ ...emptyForm, inquiryType: form.inquiryType });
   };
@@ -183,13 +192,13 @@ const Contact = () => {
       {/* Hero Banner */}
       <section className="relative py-20 md:py-32">
         <div className="absolute inset-0">
-          <img src={servicesHome3} alt="Contact NuEra" className="w-full h-full object-cover" />
+          <img src={servicesHome3} alt={c.heroAlt} className="w-full h-full object-cover" />
           <div className="absolute inset-0 hero-gradient opacity-90" />
         </div>
         <div className="container relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">Contact Us</h1>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">{c.title}</h1>
           <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-            Ready to start your project? Get in touch with our team.
+            {c.subtitle}
           </p>
         </div>
       </section>
@@ -200,35 +209,35 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="lg:col-span-1 space-y-8">
               <div>
-                <h2 className="text-2xl font-serif font-bold text-foreground mb-6">Get In Touch</h2>
+                <h2 className="text-2xl font-serif font-bold text-foreground mb-6">{c.getInTouch}</h2>
                 <ul className="space-y-5">
                   <li className="flex items-start gap-3">
                     <Phone size={20} className="text-primary mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">Phone</p>
+                      <p className="font-medium text-foreground">{c.phone}</p>
                       <a href="tel:+16042718868" className="text-muted-foreground hover:text-primary transition-colors">+1 (604) 271-8868</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <Mail size={20} className="text-primary mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">Email</p>
+                      <p className="font-medium text-foreground">{c.email}</p>
                       <a href="mailto:enquiry@nueranutra.com" className="text-muted-foreground hover:text-primary transition-colors">enquiry@nueranutra.com</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <MapPin size={20} className="text-primary mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">Address</p>
-                      <p className="text-muted-foreground">12031 No.5 Road, Richmond, BC, Canada</p>
+                      <p className="font-medium text-foreground">{c.address}</p>
+                      <p className="text-muted-foreground">{t.address}</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <Clock size={20} className="text-primary mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">Business Hours</p>
-                      <p className="text-muted-foreground">Mon–Fri 9:00–17:00</p>
-                      <p className="text-muted-foreground">Sat–Sun Closed</p>
+                      <p className="font-medium text-foreground">{c.hours}</p>
+                      <p className="text-muted-foreground">{c.hoursWeek}</p>
+                      <p className="text-muted-foreground">{c.hoursWeekend}</p>
                     </div>
                   </li>
                 </ul>
@@ -238,7 +247,7 @@ const Contact = () => {
             {/* Form */}
             <div className="lg:col-span-2">
               <div className="bg-card border border-border rounded-lg p-8">
-                <h3 className="text-xl font-serif font-bold text-foreground mb-6">Send Us a Message</h3>
+                <h3 className="text-xl font-serif font-bold text-foreground mb-6">{c.formTitle}</h3>
                 <form
                   name={NETLIFY_FORM_NAME}
                   method="POST"
@@ -248,85 +257,86 @@ const Contact = () => {
                   className="space-y-5"
                 >
                   <input type="hidden" name="form-name" value={NETLIFY_FORM_NAME} />
+                  <input type="hidden" name="locale" value={locale.code} />
                   <p
                     aria-hidden="true"
                     style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}
                   >
                     <label>
-                      Leave this field empty
+                      {c.honeypot}
                       <input name="bot-field" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
                     </label>
                   </p>
                   <div>
-                    <label className={labelClass}>Inquiry Type *</label>
+                    <label className={labelClass}>{c.inquiryType} *</label>
                     <select
                       name="inquiry_type"
                       value={form.inquiryType}
                       onChange={(e) => set({ inquiryType: e.target.value })}
                       className={fieldClass}
                     >
-                      {inquiryTypes.map((t) => (
-                        <option key={t.value} value={t.value}>{t.label}</option>
+                      {inquiryTypes.map((it, i) => (
+                        <option key={it.value} value={it.value}>{c.inquiryTypes[i]}</option>
                       ))}
                     </select>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className={labelClass}>Full Name *</label>
+                      <label className={labelClass}>{c.fullName} *</label>
                       <input type="text" required name="name" value={form.name} onChange={(e) => set({ name: e.target.value })} className={fieldClass} />
                     </div>
                     <div>
-                      <label className={labelClass}>Company Name *</label>
+                      <label className={labelClass}>{c.company} *</label>
                       <input type="text" required name="company" value={form.company} onChange={(e) => set({ company: e.target.value })} className={fieldClass} />
                     </div>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className={labelClass}>Email *</label>
+                      <label className={labelClass}>{c.emailLabel} *</label>
                       <input type="email" required name="email" value={form.email} onChange={(e) => set({ email: e.target.value })} className={fieldClass} />
                     </div>
                     <div>
-                      <label className={labelClass}>Phone{isAssessment || isNewProduct ? "" : " (optional)"}</label>
+                      <label className={labelClass}>{c.phoneLabel}{isAssessment || isNewProduct ? "" : c.optional}</label>
                       <input type="tel" name="phone" value={form.phone} onChange={(e) => set({ phone: e.target.value })} className={fieldClass} />
                     </div>
                   </div>
 
                   {isAssessment && (
                     <div className="space-y-5 border-t border-border pt-5">
-                      <p className="text-sm font-semibold uppercase tracking-widest text-primary">Existing Product Assessment</p>
+                      <p className="text-sm font-semibold uppercase tracking-widest text-primary">{c.assessmentHeading}</p>
                       <div className="grid sm:grid-cols-2 gap-5">
                         <div>
-                          <label className={labelClass}>Product Name *</label>
+                          <label className={labelClass}>{c.productName} *</label>
                           <input type="text" required name="product_name" value={form.productName} onChange={(e) => set({ productName: e.target.value })} className={fieldClass} />
                         </div>
-                        <Select required name="product_type" label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
-                        <Select required name="product_status" label="Current Product Status" value={form.productStatus} options={productStatuses} onChange={(v) => set({ productStatus: v })} />
-                        <Select required name="npn_status" label="NPN Status" value={form.npnStatus} options={npnStatuses} onChange={(v) => set({ npnStatus: v })} />
-                        <Select required name="manufacturing_situation" label="Current Manufacturing Situation" value={form.manufacturingSituation} options={manufacturingSituations} onChange={(v) => set({ manufacturingSituation: v })} />
-                        <Select required name="assessment_reason" label="Primary Reason for Assessment" value={form.assessmentReason} options={assessmentReasons} onChange={(v) => set({ assessmentReason: v })} />
-                        <Select required name="estimated_volume" label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
+                        <Select required name="product_type" {...sel} labels={c.productTypes} label={c.productType} value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
+                        <Select required name="product_status" {...sel} labels={c.productStatuses} label={c.productStatus} value={form.productStatus} options={productStatuses} onChange={(v) => set({ productStatus: v })} />
+                        <Select required name="npn_status" {...sel} labels={c.npnStatuses} label={c.npnStatus} value={form.npnStatus} options={npnStatuses} onChange={(v) => set({ npnStatus: v })} />
+                        <Select required name="manufacturing_situation" {...sel} labels={c.manufacturingSituations} label={c.manufacturingSituation} value={form.manufacturingSituation} options={manufacturingSituations} onChange={(v) => set({ manufacturingSituation: v })} />
+                        <Select required name="assessment_reason" {...sel} labels={c.assessmentReasons} label={c.assessmentReason} value={form.assessmentReason} options={assessmentReasons} onChange={(v) => set({ assessmentReason: v })} />
+                        <Select required name="estimated_volume" {...sel} labels={c.volumes} label={c.estimatedVolume} value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
                       </div>
                       <p className="text-xs leading-relaxed text-muted-foreground">
-                        Please do not submit proprietary formulas, exact ingredient percentages or confidential manufacturing documents at this stage. We will arrange a confidential exchange when appropriate.
+                        {c.confidentiality}
                       </p>
                     </div>
                   )}
 
                   {isNewProduct && (
                     <div className="space-y-5 border-t border-border pt-5">
-                      <p className="text-sm font-semibold uppercase tracking-widest text-primary">New Product Development</p>
+                      <p className="text-sm font-semibold uppercase tracking-widest text-primary">{c.newProductHeading}</p>
                       <div className="grid sm:grid-cols-2 gap-5">
-                        <Select required name="product_type" label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
-                        <Select required name="development_stage" label="Development Stage" value={form.developmentStage} options={developmentStages} onChange={(v) => set({ developmentStage: v })} />
-                        <Select required name="estimated_volume" label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
+                        <Select required name="product_type" {...sel} labels={c.productTypes} label={c.productType} value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
+                        <Select required name="development_stage" {...sel} labels={c.developmentStages} label={c.developmentStage} value={form.developmentStage} options={developmentStages} onChange={(v) => set({ developmentStage: v })} />
+                        <Select required name="estimated_volume" {...sel} labels={c.volumes} label={c.estimatedVolume} value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
                       </div>
                     </div>
                   )}
 
                   <div>
                     <label className={labelClass}>
-                      {isAssessment ? "Additional Details *" : isNewProduct ? "Project Details *" : "Message *"}
+                      {isAssessment ? c.additionalDetails : isNewProduct ? c.projectDetails : c.message} *
                     </label>
                     <textarea
                       name="message"
@@ -339,11 +349,11 @@ const Contact = () => {
                   </div>
                   {submitError && (
                     <p role="alert" className="text-sm text-destructive">
-                      We could not send your inquiry. Please try again or email enquiry@nueranutra.com.
+                      {c.submitError}
                     </p>
                   )}
                   <Button type="submit" size="lg" disabled={submitting}>
-                    {submitting ? "Sending…" : "Send Message"}
+                    {submitting ? c.sending : c.send}
                   </Button>
                 </form>
               </div>

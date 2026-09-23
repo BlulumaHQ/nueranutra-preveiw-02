@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 export const AppRoutes = () => (
   <LocaleProvider>
     <Layout>
-      <Routes caseSensitive>
+      <Routes>
         {LOCALES.map(({ prefix, code }) => [
           <Route key={`${code}-home`} path={prefix ? `${prefix}/` : "/"} element={<Index />} caseSensitive />,
           <Route key={`${code}-services`} path={`${prefix}/our-services`} element={<Services />} caseSensitive />,

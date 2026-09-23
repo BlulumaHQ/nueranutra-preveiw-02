@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Canonical host: https://nueranutra.com (path preserved, single hop).
+# HTTP -> HTTPS is enforced automatically by Netlify once the certificate is active.
+[[redirects]]
+  from = "https://www.nueranutra.com/*"
+  to = "https://nueranutra.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.nueranutra.com/*"
+  to = "https://nueranutra.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://nueranutra.com/*"
+  to = "https://nueranutra.com/:splat"
+  status = 301
+  force = true
+
+# No catch-all SPA rewrite: each page is a pre-rendered file, and unknown URLs
+# fall through to 404.html with a real HTTP 404 status.
