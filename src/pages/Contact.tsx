@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 
 const inquiryTypes = [
@@ -54,6 +53,8 @@ const developmentStages = [
   "Not Sure",
 ];
 
+const NETLIFY_FORM_NAME = "contact-inquiry";
+
 const fieldClass =
   "w-full rounded-md border border-input bg-background px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring";
 const labelClass = "block text-sm font-medium text-foreground mb-1.5";
@@ -81,16 +82,18 @@ const Select = ({
   options,
   onChange,
   required,
+  name,
 }: {
   label: string;
   value: string;
   options: string[];
   onChange: (v: string) => void;
   required?: boolean;
+  name: string;
 }) => (
   <div>
     <label className={labelClass}>{label}{required ? " *" : ""}</label>
-    <select required={required} value={value} onChange={(e) => onChange(e.target.value)} className={fieldClass}>
+    <select name={name} required={required} value={value} onChange={(e) => onChange(e.target.value)} className={fieldClass}>
       <option value="">Please select</option>
       {options.map((o) => (
         <option key={o} value={o}>{o}</option>
@@ -104,6 +107,8 @@ const Contact = () => {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState(emptyForm);
+  const [submitError, setSubmitError] = useState(false);
+  const [botField, setBotField] = useState("");
 
   useEffect(() => {
     const type = searchParams.get("type");
@@ -124,25 +129,40 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    const { error } = await supabase.from("inquiries").insert({
-      inquiry_type: form.inquiryType,
+    setSubmitError(false);
+    const data: Record<string, string> = {
+      "form-name": NETLIFY_FORM_NAME,
+      "bot-field": botField,
+      inquiry_type: inquiryTypes.find((t) => t.value === form.inquiryType)?.label ?? form.inquiryType,
       name: form.name.trim(),
-      company: form.company.trim() || null,
+      company: form.company.trim(),
       email: form.email.trim(),
-      phone: form.phone.trim() || null,
-      product_name: isAssessment ? form.productName.trim() || null : null,
-      product_type: isAssessment || isNewProduct ? form.productType || null : null,
-      product_status: isAssessment ? form.productStatus || null : null,
-      npn_status: isAssessment ? form.npnStatus || null : null,
-      manufacturing_situation: isAssessment ? form.manufacturingSituation || null : null,
-      assessment_reason: isAssessment ? form.assessmentReason || null : null,
-      development_stage: isNewProduct ? form.developmentStage || null : null,
-      estimated_volume: isAssessment || isNewProduct ? form.estimatedVolume || null : null,
-      details: form.message.trim(),
-    });
+      phone: form.phone.trim(),
+      product_name: isAssessment ? form.productName.trim() : "",
+      product_type: isAssessment || isNewProduct ? form.productType : "",
+      product_status: isAssessment ? form.productStatus : "",
+      npn_status: isAssessment ? form.npnStatus : "",
+      manufacturing_situation: isAssessment ? form.manufacturingSituation : "",
+      assessment_reason: isAssessment ? form.assessmentReason : "",
+      development_stage: isNewProduct ? form.developmentStage : "",
+      estimated_volume: isAssessment || isNewProduct ? form.estimatedVolume : "",
+      message: form.message.trim(),
+    };
+    let error = false;
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString(),
+      });
+      if (!res.ok) error = true;
+    } catch {
+      error = true;
+    }
     setSubmitting(false);
 
     if (error) {
+      setSubmitError(true);
       toast({
         title: "Submission Failed",
         description: "We could not send your inquiry. Please try again or email enquiry@nueranutra.com.",
@@ -219,10 +239,28 @@ const Contact = () => {
             <div className="lg:col-span-2">
               <div className="bg-card border border-border rounded-lg p-8">
                 <h3 className="text-xl font-serif font-bold text-foreground mb-6">Send Us a Message</h3>
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  name={NETLIFY_FORM_NAME}
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
+                  <input type="hidden" name="form-name" value={NETLIFY_FORM_NAME} />
+                  <p
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}
+                  >
+                    <label>
+                      Leave this field empty
+                      <input name="bot-field" tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
+                    </label>
+                  </p>
                   <div>
                     <label className={labelClass}>Inquiry Type *</label>
                     <select
+                      name="inquiry_type"
                       value={form.inquiryType}
                       onChange={(e) => set({ inquiryType: e.target.value })}
                       className={fieldClass}
@@ -236,21 +274,21 @@ const Contact = () => {
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className={labelClass}>Full Name *</label>
-                      <input type="text" required value={form.name} onChange={(e) => set({ name: e.target.value })} className={fieldClass} />
+                      <input type="text" required name="name" value={form.name} onChange={(e) => set({ name: e.target.value })} className={fieldClass} />
                     </div>
                     <div>
                       <label className={labelClass}>Company Name *</label>
-                      <input type="text" required value={form.company} onChange={(e) => set({ company: e.target.value })} className={fieldClass} />
+                      <input type="text" required name="company" value={form.company} onChange={(e) => set({ company: e.target.value })} className={fieldClass} />
                     </div>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className={labelClass}>Email *</label>
-                      <input type="email" required value={form.email} onChange={(e) => set({ email: e.target.value })} className={fieldClass} />
+                      <input type="email" required name="email" value={form.email} onChange={(e) => set({ email: e.target.value })} className={fieldClass} />
                     </div>
                     <div>
                       <label className={labelClass}>Phone{isAssessment || isNewProduct ? "" : " (optional)"}</label>
-                      <input type="tel" value={form.phone} onChange={(e) => set({ phone: e.target.value })} className={fieldClass} />
+                      <input type="tel" name="phone" value={form.phone} onChange={(e) => set({ phone: e.target.value })} className={fieldClass} />
                     </div>
                   </div>
 
@@ -260,14 +298,14 @@ const Contact = () => {
                       <div className="grid sm:grid-cols-2 gap-5">
                         <div>
                           <label className={labelClass}>Product Name *</label>
-                          <input type="text" required value={form.productName} onChange={(e) => set({ productName: e.target.value })} className={fieldClass} />
+                          <input type="text" required name="product_name" value={form.productName} onChange={(e) => set({ productName: e.target.value })} className={fieldClass} />
                         </div>
-                        <Select required label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
-                        <Select required label="Current Product Status" value={form.productStatus} options={productStatuses} onChange={(v) => set({ productStatus: v })} />
-                        <Select required label="NPN Status" value={form.npnStatus} options={npnStatuses} onChange={(v) => set({ npnStatus: v })} />
-                        <Select required label="Current Manufacturing Situation" value={form.manufacturingSituation} options={manufacturingSituations} onChange={(v) => set({ manufacturingSituation: v })} />
-                        <Select required label="Primary Reason for Assessment" value={form.assessmentReason} options={assessmentReasons} onChange={(v) => set({ assessmentReason: v })} />
-                        <Select required label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
+                        <Select required name="product_type" label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
+                        <Select required name="product_status" label="Current Product Status" value={form.productStatus} options={productStatuses} onChange={(v) => set({ productStatus: v })} />
+                        <Select required name="npn_status" label="NPN Status" value={form.npnStatus} options={npnStatuses} onChange={(v) => set({ npnStatus: v })} />
+                        <Select required name="manufacturing_situation" label="Current Manufacturing Situation" value={form.manufacturingSituation} options={manufacturingSituations} onChange={(v) => set({ manufacturingSituation: v })} />
+                        <Select required name="assessment_reason" label="Primary Reason for Assessment" value={form.assessmentReason} options={assessmentReasons} onChange={(v) => set({ assessmentReason: v })} />
+                        <Select required name="estimated_volume" label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
                       </div>
                       <p className="text-xs leading-relaxed text-muted-foreground">
                         Please do not submit proprietary formulas, exact ingredient percentages or confidential manufacturing documents at this stage. We will arrange a confidential exchange when appropriate.
@@ -279,9 +317,9 @@ const Contact = () => {
                     <div className="space-y-5 border-t border-border pt-5">
                       <p className="text-sm font-semibold uppercase tracking-widest text-primary">New Product Development</p>
                       <div className="grid sm:grid-cols-2 gap-5">
-                        <Select required label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
-                        <Select required label="Development Stage" value={form.developmentStage} options={developmentStages} onChange={(v) => set({ developmentStage: v })} />
-                        <Select required label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
+                        <Select required name="product_type" label="Product Type" value={form.productType} options={productTypes} onChange={(v) => set({ productType: v })} />
+                        <Select required name="development_stage" label="Development Stage" value={form.developmentStage} options={developmentStages} onChange={(v) => set({ developmentStage: v })} />
+                        <Select required name="estimated_volume" label="Estimated Production Volume" value={form.estimatedVolume} options={volumes} onChange={(v) => set({ estimatedVolume: v })} />
                       </div>
                     </div>
                   )}
@@ -291,6 +329,7 @@ const Contact = () => {
                       {isAssessment ? "Additional Details *" : isNewProduct ? "Project Details *" : "Message *"}
                     </label>
                     <textarea
+                      name="message"
                       required
                       rows={5}
                       value={form.message}
@@ -298,6 +337,11 @@ const Contact = () => {
                       className={`${fieldClass} resize-none`}
                     />
                   </div>
+                  {submitError && (
+                    <p role="alert" className="text-sm text-destructive">
+                      We could not send your inquiry. Please try again or email enquiry@nueranutra.com.
+                    </p>
+                  )}
                   <Button type="submit" size="lg" disabled={submitting}>
                     {submitting ? "Sending…" : "Send Message"}
                   </Button>

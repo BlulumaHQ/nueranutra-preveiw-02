@@ -43,6 +43,25 @@
   <meta name="twitter:card" content="summary_large_image">
 </head>
   <body>
+    <!-- Netlify Forms build-time detection (hidden) -->
+    <form name="contact-inquiry" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact-inquiry" />
+      <input name="bot-field" />
+      <input type="text" name="inquiry_type" />
+      <input type="text" name="name" />
+      <input type="text" name="company" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="product_name" />
+      <input type="text" name="product_type" />
+      <input type="text" name="product_status" />
+      <input type="text" name="npn_status" />
+      <input type="text" name="manufacturing_situation" />
+      <input type="text" name="assessment_reason" />
+      <input type="text" name="development_stage" />
+      <input type="text" name="estimated_volume" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
