@@ -7,7 +7,8 @@ import about1 from "@/assets/about-1.jpg";
 import about3 from "@/assets/about-3.jpg";
 import about4 from "@/assets/about-4.jpg";
 import about5 from "@/assets/about-5.jpg";
-import reception from "@/assets/reception.jpg";
+import receptionArea from "@/assets/nuera-nutraceutical-reception-area.webp.asset.json";
+import officeBuilding from "@/assets/nuera-nutraceutical-office-building.webp.asset.json";
 
 const milestones = [
   { year: "2007", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
