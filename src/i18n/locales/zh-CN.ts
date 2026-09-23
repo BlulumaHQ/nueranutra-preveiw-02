@@ -256,7 +256,7 @@ const zhCN: Dict = {
     email: "电子邮箱",
     address: "地址",
     hours: "工作时间",
-    hoursWeek: "周一至周五 9:00–17:00（太平洋时间）",
+    hoursWeek: "周一至周五 9:00–17:00",
     hoursWeekend: "周六、周日休息",
     formTitle: "给我们留言",
     honeypot: "请勿填写此项",

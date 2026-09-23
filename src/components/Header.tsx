@@ -3,23 +3,27 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
-
-const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "Our Services", path: "/our-services" },
-  { label: "About Us", path: "/about-us" },
-  { label: "Contact Us", path: "/contact-us" },
-];
+import { useLocale } from "@/i18n/LocaleProvider";
+import LanguageSwitcher, { MobileLanguageList } from "./LanguageSwitcher";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { t, lp } = useLocale();
+
+  const navLinks = [
+    { label: t.nav.home, path: lp("/") },
+    { label: t.nav.services, path: lp("/our-services") },
+    { label: t.nav.about, path: lp("/about-us") },
+    { label: t.nav.contact, path: lp("/contact-us") },
+  ];
+  const isActive = (p: string) => location.pathname === p || location.pathname + "/" === p;
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="NuEra Nutraceuticals Inc." className="h-14 md:h-20 w-auto" />
+        <Link to={lp("/")} className="flex items-center gap-2">
+          <img src={logo} alt={t.nav.logoAlt} className="h-14 md:h-20 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
@@ -29,14 +33,15 @@ const Header = () => {
               key={link.path}
               to={link.path}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                location.pathname === link.path ? "text-primary" : "text-foreground/80"
+                isActive(link.path) ? "text-primary" : "text-foreground/80"
               }`}
             >
               {link.label}
             </Link>
           ))}
+          <LanguageSwitcher />
           <Button asChild>
-            <Link to="/contact-us?type=manufacturing">Request a Quote</Link>
+            <Link to={lp("/contact-us?type=manufacturing")}>{t.nav.quote}</Link>
           </Button>
         </nav>
 
@@ -44,7 +49,8 @@ const Header = () => {
         <button
           className="md:hidden p-2 text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
+          aria-label={t.nav.toggleMenu}
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -60,17 +66,18 @@ const Header = () => {
                 to={link.path}
                 onClick={() => setMobileOpen(false)}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.path ? "text-primary" : "text-foreground/80"
+                  isActive(link.path) ? "text-primary" : "text-foreground/80"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
             <Button asChild className="w-fit">
-              <Link to="/contact-us?type=manufacturing" onClick={() => setMobileOpen(false)}>
-                Request a Quote
+              <Link to={lp("/contact-us?type=manufacturing")} onClick={() => setMobileOpen(false)}>
+                {t.nav.quote}
               </Link>
             </Button>
+            <MobileLanguageList onSelect={() => setMobileOpen(false)} />
           </nav>
         </div>
       )}

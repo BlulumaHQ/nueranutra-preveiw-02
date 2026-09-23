@@ -256,7 +256,7 @@ const ko: Dict = {
     email: "이메일",
     address: "주소",
     hours: "업무 시간",
-    hoursWeek: "월–금 9:00–17:00 (태평양 시간)",
+    hoursWeek: "월–금 9:00–17:00",
     hoursWeekend: "토·일 휴무",
     formTitle: "문의 남기기",
     honeypot: "이 항목은 비워 두십시오",

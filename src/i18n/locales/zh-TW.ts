@@ -256,7 +256,7 @@ const zhTW: Dict = {
     email: "電子郵件",
     address: "地址",
     hours: "營業時間",
-    hoursWeek: "週一至週五 9:00–17:00（太平洋時間）",
+    hoursWeek: "週一至週五 9:00–17:00",
     hoursWeekend: "週六、週日公休",
     formTitle: "留下您的訊息",
     honeypot: "請勿填寫此欄位",
