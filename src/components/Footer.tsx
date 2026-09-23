@@ -11,7 +11,7 @@ const Footer = () => {
           <div>
             <img src={logo} alt="NuEra Nutraceuticals Inc." className="h-16 w-auto mb-4 brightness-0 invert" />
             <p className="text-sm text-primary-foreground/80">
-              GMP-certified nutraceutical contract manufacturer delivering precision production and regulatory confidence since 2007.
+              GMP-certified nutraceutical contract manufacturer delivering precision production and regulatory confidence since 2008.
             </p>
           </div>
 
