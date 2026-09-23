@@ -34,7 +34,7 @@ const facilityStats = [
 
 const slideshowImages = [
   { src: about5, alt: "NuEra manufacturing floor" },
-  { src: reception, alt: "NuEra reception area" },
+  { src: receptionArea.url, alt: "NuEra Nutraceutical reception and office interior" },
   { src: about3, alt: "NuEra production equipment" },
   { src: about1, alt: "NuEra facility interior" },
   { src: about4, alt: "NuEra packaging area" },
