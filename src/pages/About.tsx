@@ -36,7 +36,7 @@ const slideshowImages = [
   { src: about5, alt: "NuEra manufacturing floor" },
   { src: receptionArea, alt: "NuEra Nutraceutical reception and office interior" },
   { src: about3, alt: "NuEra production equipment" },
-  { src: about1, alt: "NuEra facility interior" },
+  { src: officeBuilding, alt: "NuEra Nutraceutical office and manufacturing facility" },
   { src: about4, alt: "NuEra packaging area" },
 ];
 
