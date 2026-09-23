@@ -91,7 +91,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <img alt="NuEra Nutraceutical office and manufacturing facility" className="rounded-lg shadow-lg w-full object-cover" src={officeBuilding.url} loading="lazy" />
+              <img alt="NuEra Nutraceutical office and manufacturing facility" className="rounded-lg shadow-lg w-full object-cover" src={officeBuilding} loading="lazy" />
             </div>
           </div>
         </div>
