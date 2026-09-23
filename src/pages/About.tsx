@@ -7,7 +7,8 @@ import about1 from "@/assets/about-1.jpg";
 import about3 from "@/assets/about-3.jpg";
 import about4 from "@/assets/about-4.jpg";
 import about5 from "@/assets/about-5.jpg";
-import reception from "@/assets/reception.jpg";
+import receptionArea from "@/assets/nuera-nutraceutical-reception-area.webp";
+import officeBuilding from "@/assets/nuera-nutraceutical-office-building.webp";
 
 const milestones = [
   { year: "2007", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
@@ -33,7 +34,7 @@ const facilityStats = [
 
 const slideshowImages = [
   { src: about5, alt: "NuEra manufacturing floor" },
-  { src: reception, alt: "NuEra reception area" },
+  { src: receptionArea, alt: "NuEra Nutraceutical reception and office interior" },
   { src: about3, alt: "NuEra production equipment" },
   { src: about1, alt: "NuEra facility interior" },
   { src: about4, alt: "NuEra packaging area" },
@@ -66,7 +67,7 @@ const About = () => {
         <div className="container relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">About Us</h1>
           <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-            Proudly Canadian. Built on trust, quality, and innovation since 2007.
+            Precision, Integrity & Quality Packaged Together Since 2008
           </p>
         </div>
       </section>
@@ -90,7 +91,7 @@ const About = () => {
               </div>
             </div>
             <div>
-              <img alt="NuEra Facility" className="rounded-lg shadow-lg w-full" src="/lovable-uploads/0ac9be96-af4f-4e51-9bf2-dd2784b8de23.jpg" />
+              <img alt="NuEra Nutraceutical office and manufacturing facility" className="rounded-lg shadow-lg w-full object-cover" src={officeBuilding} loading="lazy" />
             </div>
           </div>
         </div>
@@ -155,6 +156,7 @@ const About = () => {
                   key={index}
                   src={img.src}
                   alt={img.alt}
+                  loading="lazy"
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
