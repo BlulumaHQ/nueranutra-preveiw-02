@@ -10,7 +10,7 @@ import receptionArea from "@/assets/nuera-nutraceutical-reception-area.webp";
 import officeBuilding from "@/assets/nuera-nutraceutical-office-building.webp";
 
 const milestones = [
-  { year: "2007", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
+  { year: "2008", event: "NuEra Nutraceuticals Inc. founded in Richmond, BC, Canada." },
   { year: "2010", event: "Achieved GMP certification and expanded encapsulation capacity." },
   { year: "2013", event: "Added tableting lines and pharmaceutical-grade coating capabilities." },
   { year: "2016", event: "Expanded facility to 30,000 sq. ft. with automated bottling lines." },
