@@ -156,6 +156,7 @@ const About = () => {
                   key={index}
                   src={img.src}
                   alt={img.alt}
+                  loading="lazy"
                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
                     index === currentSlide ? "opacity-100" : "opacity-0"
                   }`}
