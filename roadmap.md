@@ -16,3 +16,6 @@
 - [x] Remove Liquid from product options
 - [x] Add the 2026 About timeline milestone
 - [x] Verify responsive visuals, brand spelling, lead flows, and build health
+
+## Multilingual SEO (2026-09-23)
+- [x] EN root + /zh-tw /zh-cn /ko, prerendered pages, hreflang/canonical, sitemaps, robots, netlify.toml, locale in form
