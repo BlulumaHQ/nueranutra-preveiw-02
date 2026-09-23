@@ -67,7 +67,7 @@ const About = () => {
         <div className="container relative z-10 text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary-foreground mb-4">About Us</h1>
           <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-            Proudly Canadian. Built on trust, quality, and innovation since 2007.
+            Precision, Integrity & Quality Packaged Together Since 2008
           </p>
         </div>
       </section>
