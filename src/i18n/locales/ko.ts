@@ -154,12 +154,9 @@ const ko: Dict = {
       title: "그 위에 쌓아 올리는 것이 NuEra의 일상적 기준입니다.",
       body: "라이선스와 GMP 요건은 규제의 기반을 마련합니다. NuEra의 차별점은 절차, 시험, 문서화, 공정 관리를 일상적인 제조 전반에 어떻게 적용하는가에 있습니다.",
       alts: [
-        "GMP 인증",
         "cGMP 인증",
         "USDA Organic 유기농 인증",
         "IFANCC Halal 인증",
-        "GMP 실무 인증",
-        "Health Canada GMP 인증",
         "FDA 등록",
         "COR 2092 코셔 인증",
         "VegeCert 비건 인증",

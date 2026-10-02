@@ -13,12 +13,9 @@ import servicesHome2 from "@/assets/services-home-2.jpg";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 import servicesHome4 from "@/assets/services-home-4.jpg";
 
-import gmpRed from "@/assets/certs/gmp-red.png";
 import cgmp from "@/assets/certs/cgmp.png";
 import usdaOrganic from "@/assets/certs/usda-organic.png";
 import halal from "@/assets/certs/halal.png";
-import gmpGreen from "@/assets/certs/gmp-green.png";
-import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
 import corCertified from "@/assets/cor-certified.png";
 import veganCertified from "@/assets/vegan-certified.png";
@@ -36,15 +33,12 @@ const serviceMeta = [
   { key: "regulatory", image: servicesHome4, path: "/our-services#regulatory-compliance" },
 ] as const;
 
-const certSrcs = [gmpRed, cgmp, usdaOrganic, halal, gmpGreen, healthCanada, fda, corCertified, veganCertified];
+const certSrcs = [cgmp, usdaOrganic, halal, fda, corCertified, veganCertified];
 // Per-logo sizing so all marks read at a visually consistent scale
 const certSizes = [
-  "h-16 md:h-20",            // GMP (red)
   "h-20 md:h-24 max-w-32",   // cGMP
   "h-16 md:h-20",            // USDA Organic
   "h-16 md:h-20",            // Halal
-  "h-16 md:h-20",            // GMP (green)
-  "h-20 md:h-24 max-w-44",   // Health Canada (wide wordmark)
   "h-16 md:h-20",            // FDA
   "h-14 md:h-16 max-w-24",   // COR (smaller)
   "h-16 md:h-20",            // Vegan
@@ -272,7 +266,7 @@ const Index = () => {
         <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">{h.cert.eyebrow}</p>
         <h2 className="mb-5 text-3xl font-bold text-foreground md:text-4xl">{h.cert.title}</h2>
         <p className="mx-auto mb-12 max-w-3xl leading-relaxed text-muted-foreground">{h.cert.body}</p>
-        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
+        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-10 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-8">
           {certSrcs.map((src, i) => <img key={src} src={src} alt={h.cert.alts[i]} loading="lazy" className={`${certSizes[i]} w-full object-contain`} />)}
         </div>
       </div>
