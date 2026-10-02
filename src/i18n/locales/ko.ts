@@ -161,7 +161,8 @@ const ko: Dict = {
         "GMP 실무 인증",
         "Health Canada GMP 인증",
         "FDA 등록",
-        "Kosher 인증",
+        "COR 2092 코셔 인증",
+        "VegeCert 비건 인증",
       ],
     },
     cta: {

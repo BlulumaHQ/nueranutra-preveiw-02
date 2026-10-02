@@ -161,7 +161,8 @@ const zhTW: Dict = {
         "GMP 規範認證",
         "Health Canada GMP 認證",
         "FDA 登記",
-        "Kosher 猶太潔食認證",
+        "COR 2092 猶太潔食認證",
+        "VegeCert 純素認證",
       ],
     },
     cta: {

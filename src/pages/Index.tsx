@@ -20,7 +20,8 @@ import halal from "@/assets/certs/halal.png";
 import gmpGreen from "@/assets/certs/gmp-green.png";
 import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
-import kosherLogo from "@/assets/kosher-logo.png";
+import corCertified from "@/assets/cor-certified.png";
+import veganCertified from "@/assets/vegan-certified.png";
 
 const heroSlides = [
   { src: heroSupplementPackaging, position: "object-center" },
@@ -35,7 +36,7 @@ const serviceMeta = [
   { key: "regulatory", image: servicesHome4, path: "/our-services#regulatory-compliance" },
 ] as const;
 
-const certSrcs = [gmpRed, cgmp, usdaOrganic, halal, gmpGreen, healthCanada, fda, kosherLogo];
+const certSrcs = [gmpRed, cgmp, usdaOrganic, halal, gmpGreen, healthCanada, fda, corCertified, veganCertified];
 const pathTypes = ["new-product", "product-assessment"];
 
 const Index = () => {
@@ -259,7 +260,7 @@ const Index = () => {
         <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">{h.cert.eyebrow}</p>
         <h2 className="mb-5 text-3xl font-bold text-foreground md:text-4xl">{h.cert.title}</h2>
         <p className="mx-auto mb-12 max-w-3xl leading-relaxed text-muted-foreground">{h.cert.body}</p>
-        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-8 sm:grid-cols-4 lg:grid-cols-8 lg:gap-x-8">
+        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
           {certSrcs.map((src, i) => <img key={src} src={src} alt={h.cert.alts[i]} loading="lazy" className="h-16 w-full max-w-28 object-contain md:h-20" />)}
         </div>
       </div>
