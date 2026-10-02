@@ -156,7 +156,7 @@ const en = {
       title: "Our Daily Standard Is What Builds On It.",
       body: "Licensing and GMP requirements establish the regulatory foundation. NuEra’s differentiation comes from how procedures, testing, documentation and process control are applied throughout day-to-day manufacturing.",
       alts: [
-        "cGMP Certified",
+        "GMP Certified",
         "USDA Organic",
         "IFANCC Halal Certified",
         "FDA Registered",
