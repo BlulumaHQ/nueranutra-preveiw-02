@@ -13,12 +13,9 @@ import servicesHome2 from "@/assets/services-home-2.jpg";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 import servicesHome4 from "@/assets/services-home-4.jpg";
 
-import gmpRed from "@/assets/certs/gmp-red.png";
 import cgmp from "@/assets/certs/cgmp.png";
 import usdaOrganic from "@/assets/certs/usda-organic.png";
 import halal from "@/assets/certs/halal.png";
-import gmpGreen from "@/assets/certs/gmp-green.png";
-import healthCanada from "@/assets/certs/health-canada.png";
 import fda from "@/assets/certs/fda.png";
 import corCertified from "@/assets/cor-certified.png";
 import veganCertified from "@/assets/vegan-certified.png";
@@ -36,15 +33,12 @@ const serviceMeta = [
   { key: "regulatory", image: servicesHome4, path: "/our-services#regulatory-compliance" },
 ] as const;
 
-const certSrcs = [gmpRed, cgmp, usdaOrganic, halal, gmpGreen, healthCanada, fda, corCertified, veganCertified];
+const certSrcs = [cgmp, usdaOrganic, halal, fda, corCertified, veganCertified];
 // Per-logo sizing so all marks read at a visually consistent scale
 const certSizes = [
-  "h-16 md:h-20",            // GMP (red)
   "h-20 md:h-24 max-w-32",   // cGMP
   "h-16 md:h-20",            // USDA Organic
   "h-16 md:h-20",            // Halal
-  "h-16 md:h-20",            // GMP (green)
-  "h-20 md:h-24 max-w-44",   // Health Canada (wide wordmark)
   "h-16 md:h-20",            // FDA
   "h-14 md:h-16 max-w-24",   // COR (smaller)
   "h-16 md:h-20",            // Vegan
