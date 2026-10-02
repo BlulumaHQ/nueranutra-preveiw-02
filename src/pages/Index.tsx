@@ -37,6 +37,18 @@ const serviceMeta = [
 ] as const;
 
 const certSrcs = [gmpRed, cgmp, usdaOrganic, halal, gmpGreen, healthCanada, fda, corCertified, veganCertified];
+// Per-logo sizing so all marks read at a visually consistent scale
+const certSizes = [
+  "h-16 md:h-20",            // GMP (red)
+  "h-20 md:h-24 max-w-32",   // cGMP
+  "h-16 md:h-20",            // USDA Organic
+  "h-16 md:h-20",            // Halal
+  "h-16 md:h-20",            // GMP (green)
+  "h-20 md:h-24 max-w-44",   // Health Canada (wide wordmark)
+  "h-16 md:h-20",            // FDA
+  "h-14 md:h-16 max-w-24",   // COR (smaller)
+  "h-16 md:h-20",            // Vegan
+];
 const pathTypes = ["new-product", "product-assessment"];
 
 const Index = () => {
@@ -261,7 +273,7 @@ const Index = () => {
         <h2 className="mb-5 text-3xl font-bold text-foreground md:text-4xl">{h.cert.title}</h2>
         <p className="mx-auto mb-12 max-w-3xl leading-relaxed text-muted-foreground">{h.cert.body}</p>
         <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
-          {certSrcs.map((src, i) => <img key={src} src={src} alt={h.cert.alts[i]} loading="lazy" className="h-16 w-full max-w-28 object-contain md:h-20" />)}
+          {certSrcs.map((src, i) => <img key={src} src={src} alt={h.cert.alts[i]} loading="lazy" className={`${certSizes[i]} w-full object-contain`} />)}
         </div>
       </div>
     </section>
