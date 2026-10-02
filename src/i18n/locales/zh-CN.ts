@@ -154,12 +154,9 @@ const zhCN: Dict = {
       title: "我们的日常标准，建立在此基础之上。",
       body: "资质许可和 GMP 要求奠定了法规基础。NuEra 的不同之处，在于如何在日常生产中切实落实规程、检测、文件记录和过程控制。",
       alts: [
-        "GMP 认证",
         "cGMP 认证",
         "USDA Organic 有机认证",
         "IFANCC Halal 清真认证",
-        "GMP 规范认证",
-        "Health Canada GMP 认证",
         "FDA 注册",
         "COR 2092 犹太洁食认证",
         "VegeCert 纯素认证",

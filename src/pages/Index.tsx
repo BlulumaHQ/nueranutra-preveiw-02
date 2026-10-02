@@ -266,7 +266,7 @@ const Index = () => {
         <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">{h.cert.eyebrow}</p>
         <h2 className="mb-5 text-3xl font-bold text-foreground md:text-4xl">{h.cert.title}</h2>
         <p className="mx-auto mb-12 max-w-3xl leading-relaxed text-muted-foreground">{h.cert.body}</p>
-        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
+        <div className="grid grid-cols-2 items-center justify-items-center gap-x-7 gap-y-10 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-8">
           {certSrcs.map((src, i) => <img key={src} src={src} alt={h.cert.alts[i]} loading="lazy" className={`${certSizes[i]} w-full object-contain`} />)}
         </div>
       </div>
