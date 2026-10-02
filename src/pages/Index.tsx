@@ -13,7 +13,7 @@ import servicesHome2 from "@/assets/services-home-2.jpg";
 import servicesHome3 from "@/assets/services-home-3.jpg";
 import servicesHome4 from "@/assets/services-home-4.jpg";
 
-import cgmp from "@/assets/certs/cgmp.png";
+import gmpGreen from "@/assets/certs/gmp-green.png";
 import usdaOrganic from "@/assets/certs/usda-organic.png";
 import halal from "@/assets/certs/halal.png";
 import fda from "@/assets/certs/fda.png";
@@ -33,10 +33,10 @@ const serviceMeta = [
   { key: "regulatory", image: servicesHome4, path: "/our-services#regulatory-compliance" },
 ] as const;
 
-const certSrcs = [cgmp, usdaOrganic, halal, fda, corCertified, veganCertified];
+const certSrcs = [gmpGreen, usdaOrganic, halal, fda, corCertified, veganCertified];
 // Per-logo sizing so all marks read at a visually consistent scale
 const certSizes = [
-  "h-20 md:h-24 max-w-32",   // cGMP
+  "h-16 md:h-20",            // GMP (green)
   "h-16 md:h-20",            // USDA Organic
   "h-16 md:h-20",            // Halal
   "h-16 md:h-20",            // FDA

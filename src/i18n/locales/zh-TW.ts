@@ -154,7 +154,7 @@ const zhTW: Dict = {
       title: "我們的日常標準，建立在這個基礎之上。",
       body: "許可與 GMP 要求奠定了法規基礎；NuEra 的差異，在於如何將程序、檢測、文件與製程管控落實於每一天的製造工作中。",
       alts: [
-        "cGMP 認證",
+        "GMP 認證",
         "USDA Organic 有機認證",
         "IFANCC Halal 清真認證",
         "FDA 登記",
