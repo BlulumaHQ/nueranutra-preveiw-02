@@ -161,7 +161,8 @@ const zhCN: Dict = {
         "GMP 规范认证",
         "Health Canada GMP 认证",
         "FDA 注册",
-        "Kosher 犹太洁食认证",
+        "COR 2092 犹太洁食认证",
+        "VegeCert 纯素认证",
       ],
     },
     cta: {

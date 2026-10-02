@@ -163,7 +163,8 @@ const en = {
         "GMP Practice Certified",
         "Health Canada GMP Certified",
         "FDA Registered",
-        "Kosher Certified",
+        "COR 2092 Kosher Certified",
+        "VegeCert Certified Vegan",
       ],
     },
     cta: {
