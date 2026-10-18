@@ -19,3 +19,7 @@
 
 ## Multilingual SEO (2026-09-23)
 - [x] EN root + /zh-tw /zh-cn /ko, prerendered pages, hreflang/canonical, sitemaps, robots, netlify.toml, locale in form
+
+## Chinese copy update (2026-10-18)
+- [ ] Apply Taiwan_Mandarin.docx to Traditional Chinese and simplified_chinese.docx to Simplified Chinese, omitting editorial remnants
+- [ ] Verify both Chinese versions and preserve layout, other languages, URLs, and inquiry behavior
