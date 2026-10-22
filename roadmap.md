@@ -23,3 +23,7 @@
 ## Chinese copy update (2026-10-18)
 - [x] Apply Taiwan_Mandarin.docx to Traditional Chinese and simplified_chinese.docx to Simplified Chinese, omitting editorial remnants
 - [x] Verify both Chinese versions and preserve layout, other languages, URLs, and inquiry behavior
+
+## Korean proofreading update (2026-10-22)
+- [ ] Apply the supplied Korean proofreading table across all Korean pages; preserve unchanged and blank revision entries
+- [ ] Verify Korean content, layout, inquiry links, and unchanged other languages
