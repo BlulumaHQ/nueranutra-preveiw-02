@@ -25,5 +25,5 @@
 - [x] Verify both Chinese versions and preserve layout, other languages, URLs, and inquiry behavior
 
 ## Korean proofreading update (2026-10-22)
-- [ ] Apply the supplied Korean proofreading table across all Korean pages; preserve unchanged and blank revision entries
-- [ ] Verify Korean content, layout, inquiry links, and unchanged other languages
+- [x] Apply the supplied Korean proofreading table across all Korean pages; preserve unchanged and blank revision entries
+- [x] Verify Korean content, layout, inquiry links, and unchanged other languages
